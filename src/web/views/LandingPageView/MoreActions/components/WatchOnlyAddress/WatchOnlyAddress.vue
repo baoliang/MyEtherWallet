@@ -1,23 +1,20 @@
 <template>
   <div>
-    <BlockTitle no-page-title :data="title" class="mb-7" />
+    <div class="mew-heading-2 mb-3">Watch only address</div>
+    <div class="mb-10">
+      This is a recommended way to view your balance. You can only view your
+      balance via this option.
+    </div>
     <TableContainer />
   </div>
 </template>
 
 <script>
-import BlockTitle from '@/web/components/BlockTitle';
 import TableContainer from './components/TableContainer';
 
 export default {
-  components: { BlockTitle, TableContainer },
-  data: () => ({
-    title: {
-      title: 'Watch only address',
-      description:
-        'This is a recommended way to view your balance. You can only view your balance via this option.'
-    }
-  })
+  components: { TableContainer },
+  data: () => ({})
 };
 </script>
 
