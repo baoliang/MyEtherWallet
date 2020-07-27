@@ -11,7 +11,20 @@
       :value="signature"
       placeholder=" "
     ></v-textarea>
-    <div class="d-flex justify-center mb-5 mt-5">
+
+    <v-sheet color="primary_silver" class="border-radius--5px pa-8">
+      <div class="mb-2">
+        Signed by:
+        <span class="monospace">
+          0xf6827a968275bd62c8ca5fc08cf498b8711491c1
+        </span>
+      </div>
+      <div>
+        Message: Hi there
+      </div>
+    </v-sheet>
+
+    <div class="d-flex justify-center mb-5 mt-12">
       <mew-button title="Verify" button-size="xlarge" />
     </div>
     <div class="d-flex justify-center">
