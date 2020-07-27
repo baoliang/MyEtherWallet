@@ -46,6 +46,13 @@ import SwapIcon from '@/assets/images/icons/icon-swap.svg';
 export default {
   components: {},
   data: () => ({
+    coins: [
+      {
+        name: 'ETH',
+        subtext: 'Ethereum',
+        value: 'Ethereum'
+      }
+    ],
     swap: SwapIcon,
     etherUnitRef: [
       {
