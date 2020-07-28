@@ -11,7 +11,11 @@ const state = {
     accessWalletXWallet: { isOpen: false },
     accessWalletMobileApps: { isOpen: false },
     transactionTxConfirmation: { isOpen: false },
-    SignMessageConfirmation: { isOpen: false }
+    SignMessageConfirmation: { isOpen: false },
+    ensManagerAddOwnedDomain: { isOpen: false },
+    ensManagerManageDomain: { isOpen: false },
+    ensManagerRegisterDomain: { isOpen: false },
+    ensManagerTransferDomain: { isOpen: false }
   },
   modals: {
     walletWooCommerce: { isOpen: false }

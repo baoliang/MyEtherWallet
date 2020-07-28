@@ -4,13 +4,35 @@
       title="Confirmation"
       :has-full-width="false"
       button-size="xsmall"
+      class="mr-2"
       @click.native="openOverlay('transactionTxConfirmation')"
     />
     <mew-button
-      title="WooCommerce"
+      title="Add owned domain"
       :has-full-width="false"
       button-size="xsmall"
-      @click.native="openModal('walletWooCommerce')"
+      @click.native="openOverlay('ensManagerAddOwnedDomain')"
+    />
+
+    <mew-button
+      title="Manage Domain"
+      :has-full-width="false"
+      button-size="xsmall"
+      @click.native="openOverlay('ensManagerManageDomain')"
+    />
+
+    <mew-button
+      title="Register Domain"
+      :has-full-width="false"
+      button-size="xsmall"
+      @click.native="openOverlay('ensManagerRegisterDomain')"
+    />
+
+    <mew-button
+      title="Transfer Domain"
+      :has-full-width="false"
+      button-size="xsmall"
+      @click.native="openOverlay('ensManagerTransferDomain')"
     />
 
     <mew-banner
@@ -139,8 +161,9 @@ export default {
       },
       BG: BG,
       topBanner: {
-        title: 'Unstoppable Domain',
-        subtext: 'Replace cryptocurrency addresses with a human readable name.',
+        title: 'ENS manager',
+        subtext:
+          'Manage the public address your ENS name resolves to, or transfer it to someone else.',
         exit: 'Exit Dapp'
       },
       tab: 1,
