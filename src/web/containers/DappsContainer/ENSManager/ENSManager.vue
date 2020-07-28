@@ -127,7 +127,14 @@
               color-theme="#f1eeeb"
               :panel-items="myDomains"
               :warning-badge="warning"
-            />
+            >
+              <template v-slot:panelBody0>
+                aaa
+              </template>
+              <template v-slot:panelBody1>
+                bbb
+              </template>
+            </mew-expand-panel>
           </div>
         </div>
       </template>
