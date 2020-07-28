@@ -13,10 +13,10 @@
 
         <mew6-white-sheet class="pa-3">
           <div
-            class="d-flex align-center justify-space-between bg_datablock border-radius--5px pa-5"
+            class="d-flex align-center justify-space-between bg_datablock border-radius--5px py-5 px-7"
           >
             <div class="d-flex align-center">
-              <v-icon class="check-icon emerald--text mr-2">
+              <v-icon class="check-icon emerald--text mr-3">
                 mdi-check-circle-outline
               </v-icon>
               <div>

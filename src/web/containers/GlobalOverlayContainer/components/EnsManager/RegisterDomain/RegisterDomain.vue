@@ -1,92 +1,97 @@
 <template>
-  <BaseOverlay :open="open" :close="close" close-text="Cancel">
-    <OverlayTabs>
-      <v-tabs v-model="activeTab" color="transparent">
-        <v-tab-item>
-          <OverlayTitle title="Confirmation" />
-          <mew6-white-sheet>
-            <div class="overlay-content pa-8">
-              <FromToBlock
-                from="0x300be4b1183dca9046349e9e01b1e0c08e362964"
-                to="0x02fb7f333fd493b39b79ba57b6d510c64eaa3dc0"
-                class="mb-2"
-              />
+  <mew-overlay
+    :show-overlay="open"
+    title="Add an owned domain"
+    right-btn-text="Cancel"
+  >
+    <template v-slot:mewComponent>
+      <v-sheet width="100%" max-width="700px" color="transparent">
+        <div class="d-flex">
+          <mew-input placeholder="Enter domain name" class="mr-3 flex-grow-1" />
+          <mew-button button-size="xlarge" title="Search" />
+        </div>
 
-              <BalanceBlock />
-
-              <mew-expand-panel>
-                <template v-slot:panelBody0 :panel-items="panelItems">
-                  <div class="px-3">
-                    <div class="d-flex justify-space-between mb-2">
-                      <div>Network</div>
-                      <div>ETH by myetherwallet.com</div>
-                    </div>
-                    <div class="d-flex justify-space-between mb-2">
-                      <div>Gas Price</div>
-                      <div>40 <span class="emerald--text">GWEI</span></div>
-                    </div>
-                    <div class="d-flex justify-space-between mb-2">
-                      <div>Gas Limit</div>
-                      <div>21000 <span class="emerald--text">WEI</span></div>
-                    </div>
-                    <div class="d-flex justify-space-between mb-2">
-                      <div>Nonce</div>
-                      <div>17</div>
-                    </div>
-                    <div class="d-flex justify-space-between">
-                      <div>Data</div>
-                      <div>0x</div>
-                    </div>
-                  </div>
-                </template>
-              </mew-expand-panel>
-
-              <div class="d-flex justify-center">
-                <mew-button
-                  button-size="xlarge"
-                  title="Continue on your device"
-                  @click.native="activeTab = 1"
-                />
+        <mew6-white-sheet class="pa-3">
+          <div
+            class="d-flex align-center justify-space-between bg_datablock border-radius--5px py-5 px-7"
+          >
+            <div class="d-flex align-center">
+              <v-icon class="check-icon emerald--text mr-3">
+                mdi-check-circle-outline
+              </v-icon>
+              <div>
+                <div class="mew-heading-2 emerald--text mb-1">Owned domain</div>
+                <div class="mew-heading-2">mewdev009.eth</div>
               </div>
-
-              <warning-sheet
-                title="NOT RECOMMENDED"
-                description="Not recommanded"
-              />
             </div>
-          </mew6-white-sheet>
-        </v-tab-item>
-        <v-tab-item>
-          <OverlayTitle title="2. Confirm network & address" />
-          <div class="overlay-content">
-            bbbbb
             <mew-button
-              button-size="xlarge"
-              title="  to 0"
-              @click.native="activeTab = 0"
+              button-size="large"
+              btn-style="outline"
+              title="Add to list"
             />
           </div>
-        </v-tab-item>
-      </v-tabs>
-    </OverlayTabs>
-  </BaseOverlay>
+          <div class="pa-3">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Parent</td>
+                  <td>ETH</td>
+                </tr>
+                <tr>
+                  <td>Registrant</td>
+                  <td class="d-flex align-center">
+                    <blockie
+                      :width="blockieSize"
+                      :height="blockieSize"
+                      class="mr-3"
+                    />
+                    <div class="monospace d-flex align-center">
+                      <div>0xdD8A01dD027BB3963cC7c51dA4c948A02a46EF49</div>
+                      <CopyBtn
+                        text="0xdD8A01dD027BB3963cC7c51dA4c948A02a46EF49"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Controller</td>
+                  <td class="d-flex align-center">
+                    <blockie
+                      :width="blockieSize"
+                      :height="blockieSize"
+                      class="mr-3"
+                    />
+                    <div class="monospace d-flex align-center">
+                      <div>0xdD8A01dD027BB3963cC7c51dA4c948A02a46EF49</div>
+                      <CopyBtn
+                        text="0xdD8A01dD027BB3963cC7c51dA4c948A02a46EF49"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Expiration date</td>
+                  <td class="d-flex align-center">
+                    <div>03/12/2020 @ 20:30:12</div>
+                    <div class="error white--text ml-3 mew-caption">
+                      EXPIRE SOON
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </mew6-white-sheet>
+      </v-sheet>
+    </template>
+  </mew-overlay>
 </template>
 
 <script>
-import BaseOverlay from '@/components/Overlays/BaseOverlay';
-import OverlayTitle from '@/components/OverlayTitle';
-import OverlayTabs from '@/components/OverlayTabs';
-import FromToBlock from '@/components/FromToBlock';
-import BalanceBlock from '@/components/BalanceBlock';
+import CopyBtn from '@/web/components/Buttons/CopyButton';
 
 export default {
-  components: {
-    BaseOverlay,
-    OverlayTitle,
-    OverlayTabs,
-    FromToBlock,
-    BalanceBlock
-  },
+  components: { CopyBtn },
   props: {
     open: { default: false, type: Boolean },
     close: {
@@ -98,20 +103,37 @@ export default {
   },
   data() {
     return {
-      panelItems: [
-        {
-          name: 'Network',
-          subtext: 'ETH - myetherapi.com'
-        }
-      ],
-      activeTab: 0
+      blockieSize: '30px'
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.overlay-content {
-  width: 600px;
+.mew-caption {
+  line-height: initial;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.check-icon {
+  font-size: 65px !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+  tbody {
+    tr {
+      border-bottom: 2px solid var(--v-bg_datablock-base);
+      &:last-child {
+        border-bottom: 0;
+      }
+      td {
+        padding: 20px;
+      }
+    }
+  }
 }
 </style>
