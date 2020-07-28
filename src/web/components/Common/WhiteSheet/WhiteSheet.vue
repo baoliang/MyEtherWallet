@@ -1,10 +1,11 @@
 <template>
   <v-theme-provider root>
     <v-sheet
+      :max-width="maxWidth"
       color="bg_white_sheet"
       class="border-radius--10px box-shadow"
       :class="[
-        sideinfo ? 'sideinfo' : '',
+        sideinfo ? 'sideinfo' : 'full-width',
         overflowHidden ? 'overflow--hidden' : ''
       ]"
     >
@@ -17,12 +18,17 @@
 export default {
   props: {
     sideinfo: { default: false, type: Boolean },
-    overflowHidden: { default: false, type: Boolean }
+    overflowHidden: { default: false, type: Boolean },
+    maxWidth: { default: '', type: String }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.full-width {
+  width: 100%;
+}
+
 .sideinfo {
   width: 350px;
 }

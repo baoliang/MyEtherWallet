@@ -1,7 +1,7 @@
 <template>
   <BaseOverlay :open="open" :close="close" close-text="Cancel">
     <OverlayTitle title="Confirmation" />
-    <mew6-white-sheet>
+    <mew6-white-sheet max-width="600px">
       aaa
     </mew6-white-sheet>
   </BaseOverlay>

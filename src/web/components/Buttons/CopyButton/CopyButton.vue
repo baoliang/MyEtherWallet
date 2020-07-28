@@ -9,7 +9,7 @@
 <script>
 export default {
   props: {
-    color: { default: '', type: String },
+    color: { default: 'text_default', type: String },
     text: { default: '', type: String }
   },
   data() {
