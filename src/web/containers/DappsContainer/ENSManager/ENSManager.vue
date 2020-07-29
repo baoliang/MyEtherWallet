@@ -129,10 +129,10 @@
               :warning-badge="warning"
             >
               <template v-slot:panelBody0>
-                aaa
+                <DomainFunctions />
               </template>
               <template v-slot:panelBody1>
-                bbb
+                <DomainFunctions />
               </template>
             </mew-expand-panel>
           </div>
@@ -145,21 +145,19 @@
 <script>
 import BlockTitle from '@/components/Titles/BlockTitle';
 import BG from '@/assets/images/backgrounds/bg-unstoppable-domain.png';
+import DomainFunctions from './components/DomainFunctions';
 
 export default {
-  components: { BlockTitle },
+  components: { BlockTitle, DomainFunctions },
   data() {
     return {
       tabs: [{ name: 'Register domain' }, { name: 'Manage domain' }],
       myDomains: [
         {
-          name: 'Network',
-          subtext: 'ETH - myetherapi.com'
+          name: 'mewdev009.eth'
         },
         {
-          name: 'Address to interact with',
-          subtext: '',
-          tooltip: 'Tooltip'
+          name: 'mewdev008.eth'
         }
       ],
       warning: {
