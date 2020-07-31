@@ -46,8 +46,14 @@
 </template>
 
 <script>
+import FromToBlock from '@/components/FromToBlock';
+import BalanceBlock from '@/components/BalanceBlock';
+
 export default {
-  components: {},
+  components: {
+    FromToBlock,
+    BalanceBlock
+  },
   data() {
     return {};
   }

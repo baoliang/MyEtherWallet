@@ -41,8 +41,8 @@
       @closeBanner="closeBanner"
     />
 
-    <mew-tabs :items="tabs">
-      <template v-slot:tabContent0>
+    <mew-tabs :items="tabs" has-underline>
+      <template v-slot:tabContent1>
         <v-sheet max-width="700px" color="bg_white_sheet" class="py-12 mx-auto">
           <div class="tab-width">
             <div class="mb-5">
@@ -110,7 +110,7 @@
           </div>
         </v-sheet>
       </template>
-      <template v-slot:tabContent1>
+      <template v-slot:tabContent2>
         <div class="pa-12">
           <div class="d-flex align-center justify-space-between mb-7">
             <h4 class="font-weight-bold">
@@ -128,10 +128,10 @@
               :panel-items="myDomains"
               :warning-badge="warning"
             >
-              <template v-slot:panelBody0>
+              <template v-slot:panelBody1>
                 <DomainFunctions />
               </template>
-              <template v-slot:panelBody1>
+              <template v-slot:panelBody2>
                 <DomainFunctions />
               </template>
             </mew-expand-panel>
