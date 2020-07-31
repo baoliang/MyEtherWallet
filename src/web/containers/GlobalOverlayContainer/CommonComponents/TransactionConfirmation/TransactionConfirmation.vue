@@ -7,10 +7,21 @@
         class="mb-2"
       />
 
+      <div
+        class="bg_datablock pa-5 mb-2 d-flex align-center justify-space-between border-radius--5px"
+      >
+        <div>Domain name:</div>
+        <div>mewwalet.crypto</div>
+      </div>
+
       <BalanceBlock />
 
-      <mew-expand-panel>
-        <template v-slot:panelBody0 :panel-items="panelItems">
+      <mew-expand-panel
+        :panel-items="panelItems"
+        has-dividers
+        class="mt-5 mb-5"
+      >
+        <template v-slot:panelBody1>
           <div class="px-3">
             <div class="d-flex justify-space-between mb-2">
               <div>Network</div>
@@ -36,11 +47,14 @@
         </template>
       </mew-expand-panel>
 
-      <div class="d-flex justify-center">
+      <div class="d-flex justify-center mb-5">
         <mew-button button-size="xlarge" title="Continue on your device" />
       </div>
 
-      <warning-sheet title="NOT RECOMMENDED" description="Not recommanded" />
+      <warning-sheet
+        :description="warning.description"
+        :link-obj="warning.link"
+      />
     </div>
   </mew6-white-sheet>
 </template>
@@ -55,7 +69,22 @@ export default {
     BalanceBlock
   },
   data() {
-    return {};
+    return {
+      warning: {
+        description:
+          'Make sure all your transaction details are CORRECT. Canceling or replacing transactions can not be guaranteed to work. You still be charged gas fee even transaction failing.',
+        link: {
+          url: 'https://kb.myetherwallet.com/',
+          title: 'Learn more here…'
+        }
+      },
+      panelItems: [
+        {
+          name: 'Details',
+          subtext: ''
+        }
+      ]
+    };
   }
 };
 </script>

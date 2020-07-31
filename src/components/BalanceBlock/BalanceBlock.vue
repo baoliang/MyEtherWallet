@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_overlay border-radius--5px pa-5">
+  <div class="bg_datablock border-radius--5px pa-5">
     <v-row>
       <v-col class="pt-0">
         <h5 class="font-weight-bold">Balance Remaining</h5>

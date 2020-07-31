@@ -1,5 +1,5 @@
 <template>
-  <div class="position--relative bg_overlay border-radius--5px">
+  <div class="position--relative bg_datablock border-radius--5px">
     <div class="right-arrow d-flex align-center justify-center">
       <v-icon class="gray_text--text">mdi-arrow-right-thick</v-icon>
     </div>
