@@ -33,7 +33,7 @@
     "pre-commit": "npm run lint && npm run test"
   },
   "dependencies": {
-    "@myetherwallet/mew-components": "0.5.1-beta",
+    "@myetherwallet/mew-components": "0.5.2-beta",
     "@aave/protocol-js": "1.0.1",
     "@coolwallets/eth": "0.2.0-beta.1",
     "@coolwallets/transport-web-ble": "0.1.0",
@@ -74,7 +74,7 @@
     "vue-toasted": "1.1.28",
     "vuex": "3.5.1",
     "walletlink": "2.0.2",
-    "xss": "1.0.7"
+    "xss": "1.0.8"
   },
   "devDependencies": {
     "@ensdomains/address-encoder": "0.1.7",
@@ -119,7 +119,7 @@
     "eslint-plugin-vue": "6.2.2",
     "eth-ens-namehash": "2.0.8",
     "ethereum-ens": "0.7.7",
-    "ethereumjs-common": "1.5.1",
+    "ethereumjs-common": "1.5.2",
     "ethereumjs-tx": "2.1.2",
     "ethereumjs-util": "7.0.0",
     "ethereumjs-wallet": "1.0.0",
@@ -154,7 +154,7 @@
     "trezor-connect": "8.1.8",
     "u2f-api": "1.1.1",
     "uglify-es": "3.3.9",
-    "uuid": "8.2.0",
+    "uuid": "8.3.0",
     "vue-cli-plugin-vuetify": "2.0.7",
     "vue-i18n": "8.18.2",
     "vue-stripe-elements-plus": "0.3.2",
