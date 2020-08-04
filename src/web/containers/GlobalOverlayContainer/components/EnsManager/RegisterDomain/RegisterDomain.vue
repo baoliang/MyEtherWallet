@@ -5,6 +5,7 @@
     right-btn-text="Cancel"
   >
     <template v-slot:mewOverlayBody>
+      <DomainTaken />
       <mew-stepper :items="stepperItems" :on-step="onStep">
         <template v-slot:outsideStepContent1><Step1 /></template>
         <template v-slot:outsideStepContent2><Step2 /></template>
@@ -18,8 +19,10 @@
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
+import DomainTaken from './components/DomainTaken';
+
 export default {
-  components: { Step1, Step2, Step3 },
+  components: { Step1, Step2, Step3, DomainTaken },
   props: {
     open: { default: false, type: Boolean },
     close: {

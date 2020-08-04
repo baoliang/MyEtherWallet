@@ -1,24 +1,10 @@
 <template>
   <mew6-white-sheet>
     <mew-button
-      title="Confirmation"
-      :has-full-width="false"
-      button-size="xsmall"
-      class="mr-2"
-      @click.native="openOverlay('transactionTxConfirmation')"
-    />
-    <mew-button
       title="Add owned domain"
       :has-full-width="false"
       button-size="xsmall"
       @click.native="openOverlay('ensManagerAddOwnedDomain')"
-    />
-
-    <mew-button
-      title="Manage Domain"
-      :has-full-width="false"
-      button-size="xsmall"
-      @click.native="openOverlay('ensManagerManageDomain')"
     />
 
     <mew-button
