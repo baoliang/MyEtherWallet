@@ -6,7 +6,7 @@
     <div
       v-for="(mainItems, mainKey) in menuItems"
       :key="mainKey"
-      class="inactive"
+      class="inactive mb-1"
     >
       <!-- Main menus ======================================== -->
       <div
