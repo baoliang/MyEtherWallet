@@ -4,7 +4,7 @@ import {
   isValidChecksumAddress as isValidRSKChecksumAddress,
   toChecksumAddress as toRSKChecksumAddress
 } from 'rskjs-util';
-import { RSK } from '@/networks/types';
+//import { RSK } from '@/networks/types';
 
 class MValidator {
   constructor(type) {
@@ -29,7 +29,7 @@ class RSKUtils {
     return toRSKChecksumAddress('0x' + address.toString('hex'), this.chainID);
   }
 }
-const rskUtils = new RSKUtils(RSK.chainID);
+const rskUtils = null;
 export default {
   ETH: {
     id: 60,

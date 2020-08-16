@@ -368,7 +368,7 @@ import { mapState, mapActions } from 'vuex';
 import Misc from '@/helpers/misc';
 import BigNumber from 'bignumber.js';
 import web3Utils from 'web3-utils';
-import * as networkTypes from '@/networks/types';
+//import * as networkTypes from '@/networks/types';
 import store from 'store';
 import PageTitleComponent from '@/components/PageTitleComponent';
 import AccordionMenu from '@/components/AccordionMenu';
@@ -388,7 +388,7 @@ export default {
   },
   data() {
     return {
-      networkTypes: Object.values(networkTypes),
+      networkTypes: null,//Object.values(networkTypes),
       selectedNetwork: this.$store.state.main.network,
       stage1: false, // Select Network
       stage2: true, // Generate Information
@@ -585,9 +585,9 @@ export default {
         this.chainID = tx.getChainId();
 
         if (this.wrongNetwork) {
-          const correctNetwork = this.networkTypes.filter(
-            entry => entry.chainID === this.chainID
-          );
+          // const correctNetwork = this.networkTypes.filter(
+          //   entry => entry.chainID === this.chainID
+          // );
           if (correctNetwork) this.correctNetwork = correctNetwork[0].name_long;
         }
         this.from = Misc.sanitizeHex(tx.getSenderAddress().toString('hex'));

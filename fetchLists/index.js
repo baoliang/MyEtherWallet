@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const configs = require('./configs');
-const tokenList = require('./lists/tokens.json');
-const contractList = require('./lists/contracts.json');
+//const tokenList = require('./lists/tokens.json');
+//const contractList = require('./lists/contracts.json');
 
 if (!fs.existsSync(configs.GENERATED_FOLDER_PATH)) {
   fs.mkdirSync(configs.GENERATED_FOLDER_PATH);
@@ -229,7 +229,7 @@ const run = async () => {
 
 (async () => {
   try {
-    await run();
+  //  await run();
     console.log('Done');
   } catch (e) {
     console.error(e);

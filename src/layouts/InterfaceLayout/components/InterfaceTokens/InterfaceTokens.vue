@@ -137,8 +137,8 @@ import InterfaceTokensModal from '../InterfaceTokensModal';
 import InterfaceAds from '../InterfaceAds';
 import sortByBalance from '@/helpers/sortByBalance.js';
 import utils from 'web3-utils';
-import * as networkTypes from '@/networks/types';
-import masterFile from '@/_generated/master-file.json';
+//import * as networkTypes from '@/networks/types';
+//import masterFile from '@/_generated/master-file.json';
 
 export default {
   components: {
@@ -190,14 +190,14 @@ export default {
     ...mapState('main', ['network', 'web3', 'online']),
     networkTokens() {
       const newTokenObj = {};
-      const matchedNetwork = masterFile.filter(item => {
-        return (
-          item.network.toLowerCase() === this.network.type.name.toLowerCase()
-        );
-      });
-      matchedNetwork.forEach(item => {
-        newTokenObj[toChecksumAddress(item.contract_address)] = item;
-      });
+      // const matchedNetwork = masterFile.filter(item => {
+      //   return (
+      //     item.network.toLowerCase() === this.network.type.name.toLowerCase()
+      //   );
+      // });
+      // matchedNetwork.forEach(item => {
+      //   newTokenObj[toChecksumAddress(item.contract_address)] = item;
+      // });
 
       return newTokenObj;
     }

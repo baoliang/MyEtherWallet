@@ -148,7 +148,7 @@ import PrintModal from './components/PrintModal';
 import { Web3Wallet } from '@/wallets/software';
 import { Toast } from '@/helpers';
 import { toChecksumAddress } from '@/helpers/addressUtils';
-import * as networkTypes from '@/networks/types';
+//import * as networkTypes from '@/networks/types';
 import { BigNumber } from 'bignumber.js';
 import store from 'store';
 import TokenBalance from '@myetherwallet/eth-token-balance';
@@ -156,7 +156,7 @@ import sortByBalance from '@/helpers/sortByBalance.js';
 import AddressQrcodeModal from '@/components/AddressQrcodeModal';
 import web3Utils from 'web3-utils';
 import { isAddress } from '@/helpers/addressUtils';
-import { ETH } from '@/networks/types';
+//import { ETH } from '@/networks/types';
 import {
   LedgerWallet,
   TrezorWallet,
@@ -605,11 +605,11 @@ export default {
     },
     setCustomTokenStore() {
       const customTokenStore = store.get('customTokens');
-      Object.keys(networkTypes).forEach(network => {
-        if (customTokenStore[networkTypes[network].name] === undefined) {
-          customTokenStore[networkTypes[network].name] = [];
-        }
-      });
+      // Object.keys(networkTypes).forEach(network => {
+      //   if (customTokenStore[networkTypes[network].name] === undefined) {
+      //     customTokenStore[networkTypes[network].name] = [];
+      //   }
+      // });
       store.set('customTokens', customTokenStore);
     },
     async setTokens() {
@@ -737,15 +737,15 @@ export default {
     },
     checkAndSetNetwork(id) {
       if (this.network.type.chainID.toString() !== `${id}`) {
-        Object.keys(networkTypes).some(net => {
-          if (
-            networkTypes[net].chainID.toString() === `${id}` &&
-            this.Networks[net]
-          ) {
-            this.switchNetwork(this.Networks[net][0]);
-            return true;
-          }
-        });
+        // Object.keys(networkTypes).some(net => {
+        //   if (
+        //     networkTypes[net].chainID.toString() === `${id}` &&
+        //     this.Networks[net]
+        //   ) {
+        //     this.switchNetwork(this.Networks[net][0]);
+        //     return true;
+        //   }
+        // });
       }
     },
     matchWeb3WalletNetwork() {
@@ -777,7 +777,7 @@ export default {
             }
           }
           this.callSetENS();
-          if (this.network.type.name === ETH.name) this.fetchNames();
+         // if (this.network.type.name === '') this.fetchNames();
           this.getBlock();
           this.getBalance();
           this.setTokens();
@@ -849,13 +849,13 @@ export default {
           .getId()
           .then(id => {
             if (this.network.type.chainID.toString() !== id) {
-              Object.keys(networkTypes).some(net => {
-                if (networkTypes[net].chainID === id && this.Networks[net]) {
-                  this.switchNetwork(this.Networks[net]);
-                  clearInterval(this.pollNetwork);
-                  return true;
-                }
-              });
+              // Object.keys(networkTypes).some(net => {
+              //   if (networkTypes[net].chainID === id && this.Networks[net]) {
+              //     this.switchNetwork(this.Networks[net]);
+              //     clearInterval(this.pollNetwork);
+              //     return true;
+              //   }
+              // });
             }
           })
           .catch(e => {

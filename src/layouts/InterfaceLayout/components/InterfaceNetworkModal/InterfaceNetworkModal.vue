@@ -276,7 +276,7 @@
 import store from 'store';
 
 import InterfaceBottomText from '@/components/InterfaceBottomText';
-import * as networkTypes from '@/networks/types';
+//import * as networkTypes from '@/networks/types';
 import nodeList from '@/networks';
 import Misc from '@/helpers/misc';
 
@@ -288,9 +288,9 @@ export default {
   },
   data() {
     return {
-      types: networkTypes,
+      types: null, //networkTypes,
       selectedNetworkName: 'ETH',
-      chainID: networkTypes['ETH'].chainID,
+      chainID: 1,// networkTypes['ETH'].chainID,
       port: 443,
       name: '',
       url: '',
@@ -344,7 +344,7 @@ export default {
       homePage: '',
       blockExplorerTX: '',
       blockExplorerAddr: '',
-      chainID: networkTypes['ETH'].chainID,
+      //chainID: networkTypes['ETH'].chainID,
       tokens: [],
       contracts: [],
       currencyName: 'CUS'

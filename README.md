@@ -65,8 +65,9 @@ To find out how to disclose a vulnerability visit [hackerone.com/myetherwallet](
 3. run `git checkout develop`
 4. run `npm i` to install node packages.
 5. run `npm run build`. You can also use the offline version by opening the index file from the dist folder with your preferred browser
-6. start `npm run dev`
-7. App should be running in `https://localhost:8080`
+6. echo fs.inotify.max_user_watches=2888888 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+7. start `npm run dev`
+8. App should be running in `https://localhost:8080`
 
 Can't start due to an update found:
 Update the package in the `package.json` as told by the terminal error you see.
