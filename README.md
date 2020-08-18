@@ -68,7 +68,7 @@ To find out how to disclose a vulnerability visit [hackerone.com/myetherwallet](
 6. echo fs.inotify.max_user_watches=2888888 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 7. start `npm run dev`
 8. App should be running in `https://localhost:8080`
-
+9. If not find file npm rebuild node-sass
 Can't start due to an update found:
 Update the package in the `package.json` as told by the terminal error you see.
 Example error: `new update found print-js 1.0.60 1.0.63 2019-11-15T05:05:52.202Z`

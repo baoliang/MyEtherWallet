@@ -105,17 +105,17 @@
             :check-prefilled="checkPrefilled"
           />
           <div class="tokens">
-            <interface-tokens
+            <!-- <interface-tokens
               v-if="$route.fullPath !== '/interface/dapps/aave/action'"
               :fetch-tokens="setTokens"
               :get-token-balance="getTokenBalance"
               :tokens="tokens"
               :received-tokens="receivedTokens"
               :reset-token-selection="setTokensWithBalance"
-            />
-            <token-overview
+            /> -->
+            <!-- <token-overview
               v-if="$route.fullPath === '/interface/dapps/aave/action'"
-            />
+            /> -->
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import ENS from 'ethereum-ens';
-import TokenOverview from '@/dapps/Aave/components/TokenOverview';
+//import TokenOverview from '@/dapps/Aave/components/TokenOverview';
 import WalletPasswordModal from '@/components/WalletPasswordModal';
 import EnterPinNumberModal from '@/components/EnterPinNumberModal';
 import NetworkAndAddressModal from '@/layouts/AccessWalletLayout/components/NetworkAndAddressModal';
@@ -139,7 +139,7 @@ import InterfaceAddress from './components/InterfaceAddress';
 import InterfaceBalance from './components/InterfaceBalance';
 import InterfaceNetwork from './components/InterfaceNetwork';
 import InterfaceSideMenu from './components/InterfaceSideMenu';
-import InterfaceTokens from './components/InterfaceTokens';
+//import InterfaceTokens from './components/InterfaceTokens';
 import MobileInterfaceAddress from './components/MobileInterfaceAddress';
 import MobileInterfaceBalance from './components/MobileInterfaceBalance';
 import MobileInterfaceNetwork from './components/MobileInterfaceNetwork';
@@ -191,7 +191,7 @@ export default {
     'interface-address': InterfaceAddress,
     'interface-balance': InterfaceBalance,
     'interface-network': InterfaceNetwork,
-    'interface-tokens': InterfaceTokens,
+    //'interface-tokens': InterfaceTokens,
     'wallet-password-modal': WalletPasswordModal,
     'print-modal': PrintModal,
     'network-and-address-modal': NetworkAndAddressModal,
@@ -204,7 +204,7 @@ export default {
     'mobile-interface-network': MobileInterfaceNetwork,
     'address-qrcode-modal': AddressQrcodeModal,
     'ledger-app-modal': LedgerAppModal,
-    'token-overview': TokenOverview,
+    //'token-overview': TokenOverview,
     'expired-names-modal': ExpiredNamesModal
   },
   data() {
