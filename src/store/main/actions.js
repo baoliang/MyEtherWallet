@@ -150,7 +150,7 @@ const decryptWallet = function ({ commit, dispatch }, params) {
   // just explicitly stop it here.
   if (params[0] !== undefined && params[0] !== null) {
     commit('DECRYPT_WALLET', params[0]);
-    dispatch('setWeb3Instance', params[1]);
+    //dispatch('setWeb3Instance', params[1]);
   } else {
     // Could replace this (sentry gets triggered) with a toast, to handle more gracefully
     // Or some means of informing the user of an issue
@@ -202,12 +202,10 @@ const setLocale = function ({ commit }, val) {
 const setWeb3Instance = function ({ dispatch, commit, state }, provider) {
   const hostUrl = state.network.url
     ? url.parse(state.network.url)
-    : state.Networks['ETH'][0];
+    : state.Networks['ETH'];
   const options = {};
   // eslint-disable-next-line
-  const parsedUrl = `${hostUrl.protocol}//${hostUrl.host}${
-    state.network.port ? ':' + state.network.port : ''
-  }${hostUrl.pathname}`;
+  const parsedUrl = ``;
   state.network.username !== '' && state.network.password !== ''
     ? (options['headers'] = {
         authorization: `Basic: ${btoa(

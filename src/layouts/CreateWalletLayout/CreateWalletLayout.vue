@@ -9,7 +9,7 @@
         <div v-show="!byJson && !byMnemonic" class="nav-tab-user-input-box">
           <b-tabs class="x100">
             <div v-if="showProgressBar && false" class="progress-bar" />
-            <b-tab
+            <!-- <b-tab
               :title="this.$t('common.mew-wallet.string')"
               class="mew-connect-block"
               active
@@ -93,14 +93,14 @@
                 />
                 <create-wallet-input-footer />
               </div>
-            </b-tab>
+            </b-tab> -->
             <b-tab
               :title="$t('createWallet.mnemonic.title-tab')"
               @click="showProgressBar = true"
             >
-              <div class="warning">
+              <!-- <div class="warning">
                 <warning-message warning-type="create" />
-              </div>
+              </div> -->
               <div class="tab-content-block">
                 <div class="title-block">
                   <div class="title-popover">
@@ -122,7 +122,7 @@
         <by-mnemonic-container v-if="!byJson && byMnemonic" />
       </div>
     </div>
-    <by-json-page-footer />
+    <!-- <by-json-page-footer /> -->
   </div>
 </template>
 
@@ -132,9 +132,9 @@ import ByJsonFileContainer from './containers/ByJsonFileContainer';
 import ByMnemonicContainer from './containers/ByMnemonicContainer';
 import TutorialModal from './components/TutorialModal';
 import ScanToDownloadModal from './components/ScanToDownloadModal';
-import CreateWalletInput from './components/CreateWalletInput';
-import CreateWalletInputFooter from './components/CreateWalletInputFooter';
-import PageFooter from './components/PageFooter';
+// import CreateWalletInput from './components/CreateWalletInput';
+// import CreateWalletInputFooter from './components/CreateWalletInputFooter';
+// import PageFooter from './components/PageFooter';
 import PageTitle from './components/PageTitle';
 import store from 'store';
 import { Misc } from '@/helpers';
@@ -148,9 +148,9 @@ export default {
     'tutorial-modal': TutorialModal,
     'scan-to-download-modal': ScanToDownloadModal,
     'by-json-page-title': PageTitle,
-    'create-wallet-input': CreateWalletInput,
-    'create-wallet-input-footer': CreateWalletInputFooter,
-    'by-json-page-footer': PageFooter,
+    // 'create-wallet-input': CreateWalletInput,
+    // 'create-wallet-input-footer': CreateWalletInputFooter,
+    // 'by-json-page-footer': PageFooter,
     'ipad-modal': IpadModal,
     'warning-message': WarningMessage
   },

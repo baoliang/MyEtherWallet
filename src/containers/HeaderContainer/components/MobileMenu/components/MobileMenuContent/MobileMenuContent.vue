@@ -15,7 +15,8 @@
         </div>
       </a>
       <router-link to="/" @click.native="closeMenu">
-        <img src="@/assets/images/short-hand-logo-web.png" width="120" />
+      Xxx
+        <!-- <img src="@/assets/images/short-hand-logo-web.png" width="120" /> -->
       </router-link>
 
       <mobile-menu-button
@@ -50,9 +51,9 @@
     </div>
 
     <div class="all-menu-content-block">
-      <div class="font-reset-disabled mb-5">
+      <!-- <div class="font-reset-disabled mb-5">
         <customer-support mobile-menu />
-      </div>
+      </div> -->
       <div
         v-if="account.address"
         class="font-reset-disabled mb-5"
@@ -60,9 +61,9 @@
       >
         <div>{{ $t('common.settings') }}</div>
       </div>
-      <div class="font-reset-disabled mb-5" @click="languageMenu">
+      <!-- <div class="font-reset-disabled mb-5" @click="languageMenu">
         <div>{{ $t('common.language') }}</div>
-      </div>
+      </div> -->
       <div
         v-if="account.address"
         class="font-reset-disabled logout"
@@ -84,7 +85,7 @@ import MobileMenuButton from '../MobileMenuButton';
 import InterfaceMobileMenu from '@/layouts/InterfaceLayout/components/InterfaceMobileMenuComponent';
 import MobileBalanceBlock from '../MobileBalanceBlock';
 import MobileNetworkBlock from '../MobileNetworkBlock';
-import CustomerSupport from '@/components/CustomerSupport';
+// import CustomerSupport from '@/components/CustomerSupport';
 
 export default {
   components: {
@@ -92,7 +93,7 @@ export default {
     'interface-mobile-menu': InterfaceMobileMenu,
     'mobile-balance-block': MobileBalanceBlock,
     'mobile-network-block': MobileNetworkBlock,
-    'customer-support': CustomerSupport
+    // 'customer-support': CustomerSupport
   },
   props: {
     opensettings: {

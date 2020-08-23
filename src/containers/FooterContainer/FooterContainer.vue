@@ -5,7 +5,7 @@
       <!-- Modal -->
       <div class="wrap">
         <div class="page-container">
-          <div class="grid-col-1-1-1-2 footer-contents">
+          <!-- <div class="grid-col-1-1-1-2 footer-contents">
             <div
               v-for="(item, index) in footerContent"
               :ref="item.class"
@@ -103,9 +103,9 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="flex-space-between foot-note">
-            <div class="links">
+            <!-- <div class="links">
               <div
                 v-for="(link, index) in lowerLinks"
                 :key="link.title + index"
@@ -122,21 +122,21 @@
                   <span>{{ $t(link.title) }}</span>
                 </a>
               </div>
-            </div>
+            </div> -->
             <div class="copyright">
               <p>
-                {{ $t('footer.pricing-p') }}
+                <!-- {{ $t('footer.pricing-p') }}
                 <a
                   href="https://coingecko.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   >{{ $t('footer.coingecko') }}</a
                 >
-                <br />
+                <br /> -->
                 {{ $t('footer.copyright') }}
               </p>
             </div>
-            <div class="social">
+            <!-- <div class="social">
               <a
                 v-for="link in links"
                 :key="link.class"
@@ -147,7 +147,7 @@
               >
                 <i :class="'fa ' + link.class" />
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import CustomerSupport from '@/components/CustomerSupport';
+// import CustomerSupport from '@/components/CustomerSupport';
 import affiliates from './affiliates.js';
 const version = VERSION;
 import { Misc } from '@/helpers';
@@ -165,7 +165,7 @@ import CxFooter from '@/layouts/ExtensionBrowserAction/components/CxFooter';
 
 export default {
   components: {
-    'customer-support': CustomerSupport,
+    // 'customer-support': CustomerSupport,
     'cx-footer': CxFooter
   },
   data() {

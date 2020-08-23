@@ -2,7 +2,7 @@
   <div class="top-banner">
     <div class="wrap">
       <div class="page-container">
-        <div class="flex-col-vertical-center banner">
+        <!-- <div class="flex-col-vertical-center banner">
           <div class="banner-text">
             <h1>{{ $t('home.tagline1') }}</h1>
             <h1>{{ $t('home.tagline2') }}</h1>
@@ -11,7 +11,7 @@
           <div class="banner-image">
             <img alt src="~@/assets/images/home/big-spaceman.png" />
           </div>
-        </div>
+        </div> -->
         <div class="grid-col-2 promo-cards">
           <router-link to="/create-wallet" class="nounderline">
             <div class="card-block create-wallet">

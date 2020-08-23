@@ -1,5 +1,5 @@
 import store from 'store';
-import { Toast } from '@/helpers';
+// import { Toast } from '@/helpers';
 
 const ADD_NOTIFICATION = function (state, newNotif) {
   state.notifications = newNotif;
@@ -25,20 +25,20 @@ const UPDATE_BLOCK_NUMBER = function (state, blockNumber) {
 };
 
 const CHECK_IF_ONLINE = async function (state, status) {
-  state.online = status;
-  if (state.online) {
-    const darkList = await fetch(
-      'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/src/addresses/addresses-darklist.json'
-    )
-      .then(res => res.json())
-      .catch(e => {
-        Toast.responseHandler(e, Toast.ERROR);
-      });
-    state.darklist = {
-      data: darkList,
-      timestamp: Date.now()
-    };
-  }
+  // state.online = status;
+  // if (state.online) {
+  //   const darkList = await fetch(
+  //     'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/src/addresses/addresses-darklist.json'
+  //   )
+  //     .then(res => res.json())
+  //     .catch(e => {
+  //       Toast.responseHandler(e, Toast.ERROR);
+  //     });
+  //   state.darklist = {
+  //     data: darkList,
+  //     timestamp: Date.now()
+  //   };
+  // }
 };
 
 const CLEAR_WALLET = function (state) {

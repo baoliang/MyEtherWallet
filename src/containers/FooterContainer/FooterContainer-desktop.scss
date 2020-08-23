@@ -100,9 +100,10 @@
 
   .foot-note {
     align-items: center;
-    border-top: 1px solid $dark-blue-1;
-    margin-top: 40px;
-    padding-top: 40px;
+    // border-top: 1px solid $dark-blue-1;
+    margin-top: 0px;
+    padding-top: 0px;
+    text-align: center;;
 
     > div {
       //margin: 0 auto;
@@ -128,6 +129,7 @@
 
     .copyright {
       text-align: center;
+      margin: auto;
 
       p {
         color: $text--footer-link-color;

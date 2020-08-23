@@ -1,12 +1,12 @@
 <template>
   <div class="mobile-menu">
-    <mobile-language-selector
+    <!-- <mobile-language-selector
       v-show="!isMewCx"
       :open="langSelectorOpen"
       @isopen="langSelectorOpen = false"
       @currentlang="langChange"
       @currentflag="flagChange"
-    />
+    /> -->
 
     <!-- Mobile menu header (STARTS) -->
     <div
@@ -25,15 +25,16 @@
           :class="!isOnTop && !isMenuOpen ? 'small-menu' : ''"
           class="logo-image--container"
         >
-          <img
+          <!-- <img
             :src="require(`@/assets/images/short-hand-logo-${buildType}.png`)"
             class="logo"
             alt
-          />
+          /> -->
+          Xxx
         </div>
       </router-link>
       <div class="mobile-menu-button--container">
-        <a
+        <!-- <a
           href="https://ccswap.myetherwallet.com/#/"
           target="_blank"
           rel="noopener noreferrer"
@@ -42,7 +43,7 @@
             <img src="@/assets/images/icons/buy-eth.svg" alt />
             <p>{{ $t('common.buy-eth') }}</p>
           </div>
-        </a>
+        </a> -->
         <mobile-menu-button :ismenuopen="false" @click.native="openMenu" />
       </div>
     </div>
@@ -61,7 +62,6 @@
         :close-menu="closeMenu"
         :logout="logout"
         :opensettings="opensettings"
-        :language-menu="languageMenuOpen"
       />
     </div>
   </div>
@@ -71,15 +71,15 @@
 import { mapState } from 'vuex';
 import MobileMenuContent from './components/MobileMenuContent';
 import MobileMenuButton from './components/MobileMenuButton';
-import MobileLanguageSelector from './components/MobileLanguageSelector';
-import { Misc } from '@/helpers';
+// import MobileLanguageSelector from './components/MobileLanguageSelector';
+// import { Misc } from '@/helpers';
 import supportedLang from '../../supportedLang';
 
 export default {
   components: {
     'mobile-menu-content': MobileMenuContent,
     'mobile-menu-button': MobileMenuButton,
-    'mobile-language-selector': MobileLanguageSelector
+    // 'mobile-language-selector': MobileLanguageSelector
   },
   props: {
     opensettings: {
@@ -96,7 +96,7 @@ export default {
     }
   },
   data() {
-    const isMewCx = Misc.isMewCx();
+  //  const isMewCx = Misc.isMewCx();
     return {
       localGasPrice: '10',
       balance: 0,
@@ -106,7 +106,7 @@ export default {
       langSelectorOpen: false,
       currentLang: 'English',
       currentFlag: 'en',
-      isMewCx: isMewCx,
+      isMewCx: false,
       supportedLanguages: supportedLang
     };
   },

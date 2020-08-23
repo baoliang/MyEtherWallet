@@ -149,7 +149,8 @@
 
   .foot-note {
     align-items: center;
-    padding-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-top: 0;
     flex-direction: column;
     margin-top: 0;
@@ -190,6 +191,7 @@
     .copyright {
       order: 3;
       text-align: center;
+      margin: auto;
 
       p {
         color: $text--footer-link-color;

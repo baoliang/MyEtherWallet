@@ -10,9 +10,9 @@
     @shown="focusInput"
     @hide="clearInputs"
   >
-    <div class="warning">
+    <!-- <div class="warning">
       <warning-message />
-    </div>
+    </div> -->
     <div class="contents">
       <p class="instruction">
         {{ $t('accessWallet.mnemonic.modal.text') }}
@@ -65,7 +65,7 @@
             <div class="option-container">
               <create-wallet-input
                 v-model="password"
-                :show-button="false"
+                :="false"
                 :full-width="true"
                 :placeholder-text="$t('createWallet.mnemonic.type-in')"
               />
@@ -86,24 +86,25 @@
           />
         </div>
       </form>
-      <customer-support />
+      <!-- <customer-support /> -->
     </div>
   </b-modal>
 </template>
 
 <script>
-import CustomerSupport from '@/components/CustomerSupport';
-import WarningMessage from '@/components/WarningMessage';
+// import CustomerSupport from '@/components/CustomerSupport';
+// import WarningMessage from '@/components/WarningMessage';
 import StandardButton from '@/components/Buttons/StandardButton';
 import CreateWalletInput from './components/CreateWalletInput';
 import ExpandingOption from '@/components/ExpandingOption';
 import { MnemonicWallet } from '@/wallets';
 import { Toast } from '@/helpers';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
-    'customer-support': CustomerSupport,
-    'warning-message': WarningMessage,
+    // 'customer-support': CustomerSupport,
+    // 'warning-message': WarningMessage,
     'standard-button': StandardButton,
     'create-wallet-input': CreateWalletInput,
     'expanding-option': ExpandingOption
@@ -139,8 +140,33 @@ export default {
     }
   },
   methods: {
+    ...mapActions('main', [
+      'switchNetwork',
+      'setWeb3Instance',
+      'removeCustomPath',
+      'addCustomPath',
+      'decryptWallet'
+    ]),
     passwordInputViewChange() {
       this.password = '';
+    },
+    unlockWalletAction(wallet) {
+      this.decryptWallet([wallet.getAccount(0)])
+        .then(() => {
+          if (wallet !== null) {
+            if (!this.$route.path.split('/').includes('interface')) {
+              this.$router.push({
+                path: 'interface'
+              });
+            }
+          }
+
+          // this.$refs.networkAndAddress.hide();
+        })
+        .catch(error => {
+          // the wallet param (param[0]) is undefined or null
+          Toast.responseHandler(error, Toast.ERROR);
+        });
     },
     unlockWallet(e) {
       e.preventDefault();
@@ -152,11 +178,14 @@ export default {
           this.spinner = false;
           this.$refs.mnemonicPhrase.hide();
           this.hardwareWalletOpen(wallet);
+          this.unlockWalletAction(wallet);
+
         })
         .catch(e => {
           this.password = '';
           this.spinner = false;
           this.error = e;
+          console.log(e, 'eee');
           Toast.responseHandler(e, Toast.ERROR);
         });
     },

@@ -29,7 +29,7 @@
           accordion="networkaddraccordion"
         >
           <ul class="networks">
-            <li
+            <!-- <li
               v-for="(key, index) in Object.keys(reorderNetworkList)"
               :key="$router.path + key + index"
             >
@@ -62,7 +62,7 @@
                   {{ net.service }}
                 </p>
               </div>
-            </li>
+            </li> -->
           </ul>
         </b-collapse>
       </div>
@@ -272,7 +272,7 @@
             >{{ $t('common.wallet.access-my') }}</b-btn
           >
         </div>
-        <customer-support />
+        <!-- <customer-support /> -->
       </div>
     </div>
     <!-- .modal-content-container -->
@@ -280,7 +280,7 @@
 </template>
 
 <script>
-import CustomerSupport from '@/components/CustomerSupport';
+// import CustomerSupport from '@/components/CustomerSupport';
 import { mapState, mapActions } from 'vuex';
 import { Misc, Toast, pathHelpers } from '@/helpers';
 import web3utils from 'web3-utils';
@@ -291,7 +291,7 @@ import { LEDGER as LEDGER_TYPE } from '@/wallets/bip44/walletTypes';
 const MAX_ADDRESSES = 5;
 export default {
   components: {
-    'customer-support': CustomerSupport,
+    // 'customer-support': CustomerSupport,
     blockie: Blockie
   },
   props: {

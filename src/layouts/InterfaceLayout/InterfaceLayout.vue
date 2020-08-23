@@ -41,7 +41,7 @@
       :addresses="bcVaultWallets"
       :callback-fn="bcVaultCb"
     />
-    <address-qrcode-modal ref="addressQrcodeModal" :address="account.address" />
+    <!-- <address-qrcode-modal ref="addressQrcodeModal" :address="account.address" /> -->
     <!-- Modals ******************************************************** -->
     <!-- Modals ******************************************************** -->
     <!-- Modals ******************************************************** -->
@@ -153,7 +153,7 @@ import { BigNumber } from 'bignumber.js';
 import store from 'store';
 import TokenBalance from '@myetherwallet/eth-token-balance';
 import sortByBalance from '@/helpers/sortByBalance.js';
-import AddressQrcodeModal from '@/components/AddressQrcodeModal';
+// import AddressQrcodeModal from '@/components/AddressQrcodeModal';
 import web3Utils from 'web3-utils';
 import { isAddress } from '@/helpers/addressUtils';
 //import { ETH } from '@/networks/types';
@@ -202,7 +202,7 @@ export default {
     'mobile-interface-address': MobileInterfaceAddress,
     'mobile-interface-balance': MobileInterfaceBalance,
     'mobile-interface-network': MobileInterfaceNetwork,
-    'address-qrcode-modal': AddressQrcodeModal,
+    // 'address-qrcode-modal': AddressQrcodeModal,
     'ledger-app-modal': LedgerAppModal,
     //'token-overview': TokenOverview,
     'expired-names-modal': ExpiredNamesModal

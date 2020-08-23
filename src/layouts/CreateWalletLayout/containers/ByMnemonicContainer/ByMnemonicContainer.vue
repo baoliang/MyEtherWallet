@@ -62,7 +62,7 @@
           <div class="option-container">
             <create-wallet-input
               v-model="password"
-              :show-button="false"
+              :="false"
               :full-width="true"
             />
             <div class="password-warning">

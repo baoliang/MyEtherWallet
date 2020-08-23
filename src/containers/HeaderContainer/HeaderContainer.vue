@@ -9,7 +9,7 @@
         "
         to="/getting-started"
       >
-        <user-reminder-button />
+        <!-- <user-reminder-button /> -->
       </router-link>
     </div>
     <cx-header v-if="isMewCx" />
@@ -29,7 +29,7 @@
         :address="address"
       />
       <logout-modal ref="logout" />
-      <issue-log-modal ref="issuelog" :error="error" :resolver="resolver" />
+      <!-- <issue-log-modal ref="issuelog" :error="error" :resolver="resolver" /> -->
 
       <!-- Desktop menu *********************************** -->
       <div class="fixed-header-wrap">
@@ -54,7 +54,7 @@
                 @click.native="isMobileMenuOpen = false"
               >
                 <div class="top-logo">
-                  <img
+                  <!-- <img
                     :class="[
                       !isPageOnTop && !isMobileMenuOpen
                         ? `logo-small${!isMewCx ? '' : '-' + buildType}`
@@ -65,12 +65,13 @@
                       require(`@/assets/images/short-hand-logo-${buildType}.png`)
                     "
                     alt
-                  />
+                  /> -->
+                  Xxx
                 </div>
               </router-link>
               <div class="top-menu">
                 <b-nav>
-                  <b-nav-item
+                  <!-- <b-nav-item
                     href="https://ccswap.myetherwallet.com/#/"
                     target="_blank"
                     class="buy-eth"
@@ -82,9 +83,9 @@
                       src="@/assets/images/icons/buy-eth.svg"
                     />
                     {{ $t('common.buy-eth') }}
-                  </b-nav-item>
+                  </b-nav-item> -->
 
-                  <b-nav-item-dropdown
+                  <!-- <b-nav-item-dropdown
                     v-if="!isMewCx"
                     id="my-nav-dropdown"
                     :text="$t('common.info')"
@@ -97,7 +98,7 @@
                     <b-dropdown-item to="/#faqs">{{
                       $t('common.faqs')
                     }}</b-dropdown-item>
-                  </b-nav-item-dropdown>
+                  </b-nav-item-dropdown> -->
 
                   <b-nav-item-dropdown
                     v-if="address !== null"
@@ -121,7 +122,7 @@
                       }})</b-dropdown-item
                     >
                   </b-nav-item-dropdown>
-                  <div v-show="!isMewCx" class="language-menu-container">
+                  <!-- <div v-show="!isMewCx" class="language-menu-container">
                     <div class="down-arrow"></div>
                     <b-nav-item-dropdown
                       class="language-menu"
@@ -151,8 +152,8 @@
                         >{{ language.name }}</b-dropdown-item
                       >
                     </b-nav-item-dropdown>
-                  </div>
-                  <div class="notification-menu-container">
+                  </div> -->
+                  <!-- <div class="notification-menu-container">
                     <notification
                       v-if="
                         $route.fullPath.includes('view-wallet-info') ||
@@ -160,7 +161,7 @@
                       "
                       ref="notification"
                     />
-                  </div>
+                  </div> -->
                   <b-nav-item
                     v-if="showButtons && !isPageOnTop && !isMewCx"
                     :class="[
@@ -221,7 +222,7 @@
       </div>
       <!-- Desktop menu *********************************** -->
     </div>
-    <welcome-modal ref="welcome" :first-time-ru="firstTimeRu" />
+    <!-- <welcome-modal ref="welcome" :first-time-ru="firstTimeRu" /> -->
   </div>
 </template>
 
@@ -230,18 +231,18 @@ import { mapState, mapActions } from 'vuex';
 import store from 'store';
 import { Misc, Toast } from '@/helpers';
 import Blockie from '@/components/Blockie';
-import NotificationsContainer from '@/containers/NotificationsContainer';
-import UserReminderButton from '@/components/UserReminderButton';
+// import NotificationsContainer from '@/containers/NotificationsContainer';
+// import UserReminderButton from '@/components/UserReminderButton';
 import SettingsModal from '@/components/SettingsModal';
 import LogoutModal from '@/components/LogoutModal';
-import IssueLogModal from '@/components/IssueLogModal';
+// import IssueLogModal from '@/components/IssueLogModal';
 import BigNumber from 'bignumber.js';
 import MobileMenu from './components/MobileMenu';
 import DisconnectedModal from '@/components/DisconnectedModal';
 import DecisionTree from '@/components/DecisionTree';
 import CxHeader from '@/layouts/ExtensionBrowserAction/components/CxHeader';
 import supportedLang from './supportedLang';
-import WelcomeModal from '@/components/WelcomeModal';
+// import WelcomeModal from '@/components/WelcomeModal';
 
 const events = {
   issueModal: 'issueModal',
@@ -251,16 +252,16 @@ const events = {
 export default {
   components: {
     blockie: Blockie,
-    notification: NotificationsContainer,
+    // notification: NotificationsContainer,
     'settings-modal': SettingsModal,
     'logout-modal': LogoutModal,
-    'issue-log-modal': IssueLogModal,
-    'user-reminder-button': UserReminderButton,
+    // 'issue-log-modal': IssueLogModal,
+    // 'user-reminder-button': UserReminderButton,
     'mobile-menu': MobileMenu,
     'disconnected-modal': DisconnectedModal,
     'decision-tree': DecisionTree,
-    'cx-header': CxHeader,
-    'welcome-modal': WelcomeModal
+    'cx-header': CxHeader
+    // 'welcome-modal': WelcomeModal
   },
   data() {
     const isMewCx = Misc.isMewCx();
@@ -348,6 +349,7 @@ export default {
     };
 
     this.$eventHub.$on('issueModal', (error, resolve) => {
+      //console.log(error);
       let errorPop = store.get('errorPop') || 0;
       errorPop += 1;
       store.set('errorPop', errorPop);

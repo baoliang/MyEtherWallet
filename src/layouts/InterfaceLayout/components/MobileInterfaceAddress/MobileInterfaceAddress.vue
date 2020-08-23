@@ -1,6 +1,6 @@
 <template>
   <div>
-    <address-qrcode-modal ref="qrcode" :address="account.address" />
+    <!-- <address-qrcode-modal ref="qrcode" :address="account.address" /> -->
     <div class="wrap d-flex align-items-center">
       <blockie :address="address" :size="8" :scale="16" class="blockie-image" />
       <div class="address-contents">
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import AddressQrcodeModal from '@/components/AddressQrcodeModal';
+// import AddressQrcodeModal from '@/components/AddressQrcodeModal';
 import Blockie from '@/components/Blockie';
 import { mapState } from 'vuex';
 import { Toast } from '@/helpers';
@@ -66,7 +66,7 @@ import {
 export default {
   components: {
     blockie: Blockie,
-    'address-qrcode-modal': AddressQrcodeModal
+    // 'address-qrcode-modal': AddressQrcodeModal
   },
   props: {
     address: {

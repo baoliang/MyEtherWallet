@@ -8,9 +8,9 @@
     static
     lazy
   >
-    <div class="warning">
+    <!-- <div class="warning">
       <warning-message />
-    </div>
+    </div> -->
     <div class="content-block">
       <div class="d-block content-container text-center">
         <div class="button-options">
@@ -24,7 +24,7 @@
             @updateSelected="updateSelected"
           />
         </div>
-        <div class="hardware-link">
+        <!-- <div class="hardware-link">
           <p>
             {{ $t('accessWallet.software.modal.purchase-text') }}
           </p>
@@ -38,7 +38,7 @@
           name="file"
           style="display: none;"
           @change="uploadFile"
-        />
+        /> -->
       </div>
       <div class="button-container-block">
         <standard-button
@@ -52,26 +52,26 @@
           :click-function="continueAccess"
         />
       </div>
-      <customer-support />
+      <!-- <customer-support /> -->
     </div>
   </b-modal>
 </template>
 
 <script>
-import CustomerSupport from '@/components/CustomerSupport';
-import WarningMessage from '@/components/WarningMessage';
-import byJsonImgHov from '@/assets/images/icons/button-json-hover.svg';
+// import CustomerSupport from '@/components/CustomerSupport';
+// import WarningMessage from '@/components/WarningMessage';
+// import byJsonImgHov from '@/assets/images/icons/button-json-hover.svg';
 import byMnemImgHov from '@/assets/images/icons/button-mnemonic-hover.svg';
-import privKeyImgHov from '@/assets/images/icons/button-key-hover.svg';
+// import privKeyImgHov from '@/assets/images/icons/button-key-hover.svg';
 import WalletOption from '../WalletOption';
 import StandardButton from '@/components/Buttons/StandardButton';
 import { Toast } from '@/helpers';
 
 export default {
   components: {
-    'customer-support': CustomerSupport,
+    // 'customer-support': CustomerSupport,
     'wallet-option': WalletOption,
-    'warning-message': WarningMessage,
+    // 'warning-message': WarningMessage,
     'standard-button': StandardButton
   },
   props: {
@@ -97,21 +97,21 @@ export default {
       file: '',
       selected: '',
       items: [
-        {
-          name: 'byJson',
-          imgHoverPath: byJsonImgHov,
-          text: 'accessWallet.json-file'
-        },
+        // {
+        //   name: 'byJson',
+        //   imgHoverPath: byJsonImgHov,
+        //   text: 'accessWallet.json-file'
+        // },
         {
           name: 'byMnem',
           imgHoverPath: byMnemImgHov,
           text: 'accessWallet.mnemonic.string'
         },
-        {
-          name: 'byPriv',
-          imgHoverPath: privKeyImgHov,
-          text: 'accessWallet.private-key.string'
-        }
+        // {
+        //   name: 'byPriv',
+        //   imgHoverPath: privKeyImgHov,
+        //   text: 'accessWallet.private-key.string'
+        // }
       ]
     };
   },
