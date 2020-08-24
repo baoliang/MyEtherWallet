@@ -32,10 +32,10 @@
         @hardwareWalletOpen="hardwareWalletOpen"
       /> -->
 
-      <network-and-address-modal
+      <!-- <network-and-address-modal
         ref="networkandaddressModal"
         :hardware-wallet="hardwareWallet"
-      />
+      /> -->
 
       <!-- <metamask-modal
         ref="metamaskModal"
@@ -121,7 +121,7 @@ import AccessWalletButton from './components/AccessWalletButton';
 // import HardwarePasswordModal from './components/HardwarePasswordModal';
 // import Web3WalletModal from './components/Web3WalletModal';
 // import MewConnectModal from './components/MewConnectModal';
-import NetworkAndAddressModal from './components/NetworkAndAddressModal';
+// import NetworkAndAddressModal from './components/NetworkAndAddressModal';
 import PasswordModal from './components/PasswordModal';
 import PrivateKeyModal from './components/PrivateKeyModal';
 import SoftwareModal from './components/SoftwareModal';
@@ -137,12 +137,12 @@ import EnterPinNumberModal from '@/components/EnterPinNumberModal';
 // import mewConnectImg from '@/assets/images/icons/button-mewconnect.svg';
 // import hardwareImg from '@/assets/images/icons/button-hardware.svg';
 // import web3Img from '@/assets/images/icons/button-web3.svg';
-import softwareImg from '@/assets/images/icons/button-software.svg';
+// import softwareImg from '@/assets/images/icons/button-software.svg';
 
 // import mewConnectImgDisabled from '@/assets/images/icons/button-mewconnect-disabled.svg';
 // import hardwareImgDisabled from '@/assets/images/icons/button-hardware-disabled.svg';
 // import web3ImgDisabled from '@/assets/images/icons/button-web3-disabled.svg';
-import softwareImgDisabled from '@/assets/images/icons/button-software-disabled.svg';
+// import softwareImgDisabled from '@/assets/images/icons/button-software-disabled.svg';
 
 import { mapState, mapActions } from 'vuex';
 import { Toast } from '@/helpers';
@@ -156,7 +156,7 @@ export default {
   components: {
     // faqs: FaqsContainer,
     // 'mew-connect-modal': MewConnectModal,
-    'network-and-address-modal': NetworkAndAddressModal,
+    // 'network-and-address-modal': NetworkAndAddressModal,
     // 'hardware-modal': HardwareModal,
     // 'hardware-password-modal': HardwarePasswordModal,
     // 'metamask-modal': Web3WalletModal,
@@ -178,6 +178,7 @@ export default {
     return {
       file: {},
       phrase: '',
+      ciphertext: localStorage.getItem('ciphertext'),
       hardwareWallet: {},
       hardwareAddresses: [],
       modalCb: () => {},
@@ -220,44 +221,49 @@ export default {
         //   disabled: false,
         //   classname: 'button-metamask'
         // },
-        {
-          func: this.softwareModalOpen,
-          title: 'accessWallet.software.option-title',
-          desc: 'accessWallet.software.option-text',
-          recommend: 'common.not-recommended.string',
-          tooltip: '',
-          img: softwareImg,
-          imgDisabled: softwareImgDisabled,
-          disabled: false,
-          classname: 'button-software'
-        }
+        // {
+        //   func: this.softwareModalOpen,
+        //   title: 'accessWallet.software.option-title',
+        //   desc: 'accessWallet.software.option-text',
+        //   // recommend: 'common.not-recommended.string',
+        //   tooltip: '',
+        //   img: softwareImg,
+        //   imgDisabled: softwareImgDisabled,
+        //   disabled: false,
+        //   classname: 'button-software'
+        // }
       ],
       isMetaMask: false,
       web3WalletExists: false
     };
   },
   computed: {
-    ...mapState('main', ['Networks', 'online'])
+    ...mapState('main', ['Networks', 'online', 'wallet'])
   },
   mounted() {
     this.$nextTick(() => {
       this.buttons.forEach(btn => {
         btn.disabled = this.isDisabled(btn.classname);
       });
+     // this.checkWeb3();
+     // this.checkIsMetamask();
+    });
+    if(this.wallet) {
+      this.$route.push('/interface');
+    } else {
+      this.passwordOpen();
+    }
 
-      this.checkWeb3();
-      this.checkIsMetamask();
-    });
 
-    this.$eventHub.$on('userAddresses', (addresses, cb) => {
-      this.hardwareAddresses = addresses;
-      this.modalCb = cb;
-      this.$refs.bcvault.$refs.bcvaultAddress.show();
-    });
-    this.$refs.bcvault.$refs.bcvaultAddress.$on('hidden', () => {
-      this.hardwareAddresses = [];
-      this.modalCb = () => {};
-    });
+    // this.$eventHub.$on('userAddresses', (addresses, cb) => {
+    //   this.hardwareAddresses = addresses;
+    //   this.modalCb = cb;
+    //   this.$refs.bcvault.$refs.bcvaultAddress.show();
+    // });
+    // this.$refs.bcvault.$refs.bcvaultAddress.$on('hidden', () => {
+    //   this.hardwareAddresses = [];
+    //   this.modalCb = () => {};
+    // });
   },
   methods: {
     ...mapActions('main', ['decryptWallet']),
@@ -314,7 +320,7 @@ export default {
       this.$refs.ledgerAppModal.$refs.ledgerApp.show();
     },
     networkAndAddressOpen() {
-      this.$refs.networkandaddressModal.$refs.networkAndAddress.show();
+     // this.$refs.networkandaddressModal.$refs.networkAndAddress.show();
     },
     hardwareModalOpen() {
       this.$refs.hardwareModal.$refs.hardware.show();

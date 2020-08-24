@@ -39,38 +39,38 @@ export default {
     }
   },
   created() {
-    const _self = this;
-    window.chrome.storage.sync.get(null, item => {
-      if (item.hasOwnProperty('defNetwork')) {
-        const networkProps = JSON.parse(item['defNetwork']);
-        let network = {};
-        if (networkProps.hasOwnProperty('url')) {
-          network = _self.Networks[networkProps.key][0];
-          window.chrome.storage.sync.set(
-            {
-              defNetwork: JSON.stringify({
-                key: network.type.name,
-                service: network.service
-              })
-            },
-            () => {}
-          );
-        } else {
-          network = _self.Networks[networkProps.key][0];
-          window.chrome.storage.sync.set({
-            defNetwork: JSON.stringify({
-              key: network.type.name,
-              service: network.service
-            })
-          });
-        }
-        _self.switchNetwork(network).then(() => {
-          _self.setWeb3Instance();
-        });
-      } else {
-        _self.setWeb3Instance();
-      }
-    });
+  //  const _self = this;
+    //window.chrome.storage.sync.get(null, item => {
+      // if (item.hasOwnProperty('defNetwork')) {
+      //   const networkProps = JSON.parse(item['defNetwork']);
+      //   let network = {};
+      //   if (networkProps.hasOwnProperty('url')) {
+      //     network = _self.Networks[networkProps.key][0];
+      //     window.chrome.storage.sync.set(
+      //       {
+      //         defNetwork: JSON.stringify({
+      //           key: network.type.name,
+      //           service: network.service
+      //         })
+      //       },
+      //       () => {}
+      //     );
+      //   } else {
+      //     network = _self.Networks[networkProps.key][0];
+      //     window.chrome.storage.sync.set({
+      //       defNetwork: JSON.stringify({
+      //         key: network.type.name,
+      //         service: network.service
+      //       })
+      //     });
+      //   }
+      //   _self.switchNetwork(network).then(() => {
+      //     _self.setWeb3Instance();
+      //   });
+      // } else {
+      //   _self.setWeb3Instance();
+      // }
+    //});
   },
   mounted() {
     this.$refs.logoutWarningModal.$refs.logoutWarningModal.$on('hidden', () => {

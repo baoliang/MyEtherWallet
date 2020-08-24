@@ -37,7 +37,7 @@
       </div>
     </div>
     <!-- === MEW custom form ======================================== -->
-    <button
+    <!-- <button
       v-if="showButton"
       :class="[
         errors.has('password') ||
@@ -52,7 +52,7 @@
     >
       {{ $t('common.next') }}
       <img alt src="~@/assets/images/icons/right-arrow.png" />
-    </button>
+    </button> -->
   </form>
 </template>
 
