@@ -20,22 +20,22 @@
       <div class="tools">
         <div class="value-switch noselect">
           <div class="sliding-switch">
-            <label class="switch">
+            <!-- <label class="switch">
               <input type="checkbox" />
               <span class="slider round" @click="mnemonicValueBitSizeChange" />
-            </label>
-            <div class="labels">
+            </label> -->
+            <!-- <div class="labels">
               <span :class="[!mnemonic24 ? 'white' : '', 'label-left']"
                 >12</span
               >
               <span :class="[mnemonic24 ? 'white' : '', 'label-right']"
                 >24</span
               >
-            </div>
+            </div> -->
           </div>
-          <span class="text__base link switch-label">{{
+          <!-- <span class="text__base link switch-label">{{
             $t('accessWallet.mnemonic.value')
-          }}</span>
+          }}</span> -->
         </div>
       </div>
       <form>
@@ -53,7 +53,7 @@
           </ul>
         </div>
         <div class="option-container-block">
-          <expanding-option
+          <!-- <expanding-option
             :title="$t('createWallet.mnemonic.do-you-extra-word')"
             :popover="
               $t('createWallet.mnemonic.access-wallet-extra-word-popover')
@@ -61,16 +61,15 @@
             :button-text="$t('common.no')"
             :show-enable="true"
             @expanded="passwordInputViewChange"
-          >
+          > -->
             <div class="option-container">
               <create-wallet-input
                 v-model="password"
-                :="false"
                 :full-width="true"
-                :placeholder-text="$t('createWallet.mnemonic.type-in')"
+                :placeholder-text="'Password'"
               />
             </div>
-          </expanding-option>
+          <!-- </expanding-option> -->
         </div>
         <p v-show="error !== ''" class="error">{{ error }}</p>
         <div class="button-container-block">
@@ -96,8 +95,10 @@
 // import WarningMessage from '@/components/WarningMessage';
 import StandardButton from '@/components/Buttons/StandardButton';
 import CreateWalletInput from './components/CreateWalletInput';
-import ExpandingOption from '@/components/ExpandingOption';
+// import ExpandingOption from '@/components/ExpandingOption';
 import { MnemonicWallet } from '@/wallets';
+import AES from 'crypto-js/aes';
+
 import { Toast } from '@/helpers';
 import { mapActions } from 'vuex';
 
@@ -107,7 +108,7 @@ export default {
     // 'warning-message': WarningMessage,
     'standard-button': StandardButton,
     'create-wallet-input': CreateWalletInput,
-    'expanding-option': ExpandingOption
+    // 'expanding-option': ExpandingOption
   },
   props: {
     hardwareWalletOpen: {
@@ -172,8 +173,11 @@ export default {
       e.preventDefault();
       e.stopPropagation();
       this.spinner = true;
+      const that = this;
       MnemonicWallet(this.mnemonicPhrase.join(' '), this.password)
         .then(wallet => {
+          const ciphertext = AES.encrypt(JSON.stringify(data), that.password).toString();
+          localStorage.setItem('ciphertext', ciphertext);
           this.password = '';
           this.spinner = false;
           this.$refs.mnemonicPhrase.hide();

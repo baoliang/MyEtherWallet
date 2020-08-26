@@ -12,7 +12,7 @@
         <!-- <user-reminder-button /> -->
       </router-link>
     </div>
-    <cx-header v-if="isMewCx" />
+    <!-- <cx-header v-if="isMewCx" /> -->
     <div v-if="!isMewCx" class="header">
       <mobile-menu
         :opensettings="openSettings"
@@ -240,7 +240,7 @@ import BigNumber from 'bignumber.js';
 import MobileMenu from './components/MobileMenu';
 import DisconnectedModal from '@/components/DisconnectedModal';
 import DecisionTree from '@/components/DecisionTree';
-import CxHeader from '@/layouts/ExtensionBrowserAction/components/CxHeader';
+// import CxHeader from '@/layouts/ExtensionBrowserAction/components/CxHeader';
 import supportedLang from './supportedLang';
 // import WelcomeModal from '@/components/WelcomeModal';
 
@@ -260,7 +260,7 @@ export default {
     'mobile-menu': MobileMenu,
     'disconnected-modal': DisconnectedModal,
     'decision-tree': DecisionTree,
-    'cx-header': CxHeader
+    // 'cx-header': CxHeader
     // 'welcome-modal': WelcomeModal
   },
   data() {
@@ -349,7 +349,7 @@ export default {
     };
 
     this.$eventHub.$on('issueModal', (error, resolve) => {
-      //console.log(error);
+      console.log(error);
       let errorPop = store.get('errorPop') || 0;
       errorPop += 1;
       store.set('errorPop', errorPop);
@@ -388,14 +388,14 @@ export default {
       this.currentName = storedLocale.name;
     },
     setHighGasPrice() {
-      this.web3.eth
-        .getGasPrice()
-        .then(res => {
-          this.gasPrice = new BigNumber(res).toString();
-        })
-        .catch(e => {
-          Toast.responseHandler(e, Toast.ERROR);
-        });
+      // this.web3.eth
+      //   .getGasPrice()
+      //   .then(res => {
+      //     this.gasPrice = new BigNumber(res).toString();
+      //   })
+      //   .catch(e => {
+      //     Toast.responseHandler(e, Toast.ERROR);
+      //   });
     },
     openSettings() {
       this.$refs.settings.$refs.settings.show();
