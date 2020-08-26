@@ -10,10 +10,10 @@
       :networks="Networks"
       @hardwareWalletOpen="toggleNetworkAddrModal"
     />
-    <mnemonic-modal
+    <!-- <mnemonic-modal
       ref="mnemonicPhraseModal"
       :hardware-wallet-open="toggleNetworkAddrModal"
-    />
+    /> -->
 
     <mnemonic-password-modal
       ref="mnemonicPhrasePassword"
@@ -133,7 +133,7 @@ import NetworkAndAddressModal from '@/layouts/AccessWalletLayout/components/Netw
 import BcVaultAddressModal from '@/layouts/AccessWalletLayout/components/BcVaultAddressModal';
 import HardwarePasswordModal from '@/layouts/AccessWalletLayout/components/HardwarePasswordModal';
 import MnemonicPasswordModal from '@/layouts/AccessWalletLayout/components/MnemonicPasswordModal';
-import MnemonicModal from '@/layouts/AccessWalletLayout/components/MnemonicModal';
+// import MnemonicModal from '@/layouts/AccessWalletLayout/components/MnemonicModal';
 import LedgerAppModal from '@/layouts/AccessWalletLayout/components/LedgerAppModal';
 import InterfaceAddress from './components/InterfaceAddress';
 import InterfaceBalance from './components/InterfaceBalance';
@@ -196,7 +196,7 @@ export default {
     'print-modal': PrintModal,
     'network-and-address-modal': NetworkAndAddressModal,
     'hardware-password-modal': HardwarePasswordModal,
-    'mnemonic-modal': MnemonicModal,
+    // 'mnemonic-modal': MnemonicModal,
     'mnemonic-password-modal': MnemonicPasswordModal,
     'enter-pin-number-modal': EnterPinNumberModal,
     'mobile-interface-address': MobileInterfaceAddress,
@@ -395,7 +395,7 @@ export default {
           this.togglePasswordModal(SecalotWallet, 'Secalot');
           break;
         case MNEMONIC_TYPE:
-          this.$refs.mnemonicPhraseModal.$refs.mnemonicPhrase.show();
+         // this.$refs.mnemonicPhraseModal.$refs.mnemonicPhrase.show();
           break;
         case KEEPKEY_TYPE:
           KeepkeyWallet(false, this.$eventHub)

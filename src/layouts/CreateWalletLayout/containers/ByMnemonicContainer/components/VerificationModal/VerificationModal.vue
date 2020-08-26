@@ -152,6 +152,9 @@ export default {
       Object.keys(this.inputs).forEach(item => {
         updatedArray.splice(item, 1, this.inputs[item]);
       });
+      if (this.password.length == 0) {
+        this.errorMsg = 'Please input password';
+      }
       if (!this.hasEmpty()) {
         this.errorMsg = this.$t('createWallet.mnemonic.fields-missing');
       } else if (

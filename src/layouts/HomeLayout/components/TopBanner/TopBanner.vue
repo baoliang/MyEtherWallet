@@ -23,11 +23,11 @@
                   <div class="title">
                     <h3>{{ $t('common.wallet.create-new') }}</h3>
                   </div>
-                  <div class="card-content">
+                  <!-- <div class="card-content">
                     <p class="color-white content-text">
                       {{ $t('home.create-new-wallet.text') }}
                     </p>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="card-content">
                   <p class="get-started button">
@@ -55,7 +55,7 @@
                   <div class="title">
                     <h3>{{ $t('common.wallet.access-my') }}</h3>
                   </div>
-                  <div class="card-content">
+                  <!-- <div class="card-content">
                     <p class="color-white content-text">
                       {{ $t('home.access-my-wallet.text') }}
                     </p>
@@ -65,7 +65,7 @@
                       <li>{{ $t('home.access-my-wallet.opt-2') }}</li>
                       <li>{{ $t('home.access-my-wallet.opt-3') }}</li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="card-content">
                   <p class="get-started button">

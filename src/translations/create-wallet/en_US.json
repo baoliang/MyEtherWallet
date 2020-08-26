@@ -84,7 +84,7 @@
     },
     "invalid-network-id": "Invalid networkId signature returned. Expected: {networkId} , Got: {signedChainId} InvalidNetworkId",
     "fields-missing": "Some fields are still missing!",
-    "does-not-match-extra-word": "Mnemonic and extra word doesn't match! Please check your input!",
+    "does-not-match-extra-word": "Mnemonic and password doesn't match! Please check your input!",
     "input-does-not-match": "Mnemonic doesn't match! Please write it down correctly!"
   },
   "created": {

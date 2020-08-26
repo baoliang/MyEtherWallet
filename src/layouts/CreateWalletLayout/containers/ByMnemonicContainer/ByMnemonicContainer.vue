@@ -1,6 +1,6 @@
 <template>
   <div class="create-wallet-by-mnemonic">
-    <finish-modal ref="finish" :unlock="unlockWallet" />
+    <finish-modal ref="finish" :unlock="unlockWalletShow" />
     <print-modal
       ref="print"
       :mnemonic="mnemonicValues"
@@ -112,6 +112,7 @@ import CreateWalletInput from '../../components/CreateWalletInput';
 import { mapActions } from 'vuex';
 import AES from 'crypto-js/aes';
 import { Toast } from '@/helpers';
+import { MnemonicWallet } from '@/wallets';
 
 const bip39 = require('bip39');
 
@@ -139,15 +140,12 @@ export default {
     this.mnemonicValues = bip39.generateMnemonic(128).split(' ');
   },
   methods: {
-      ...mapActions('main', [
-     
-      'decryptWallet'
-    ]),
+    ...mapActions('main', ['decryptWallet']),
     passwordInputViewChange() {
       this.password = '';
     },
-    unlockWallet() {
-      this.$router.push('/access-my-wallet');
+    unlockWalletShow() {
+      this.$router.push('/interface');
     },
     mnemonicValueRefresh() {
       if (this.mnemonic24 === true) {
@@ -174,15 +172,12 @@ export default {
         right.classList.remove('white');
       }
     },
-     unlockWalletAction(wallet) {
+    unlockWalletAction(wallet) {
+      const that = this;
       this.decryptWallet([wallet.getAccount(0)])
         .then(() => {
           if (wallet !== null) {
-            if (!this.$route.path.split('/').includes('interface')) {
-              this.$router.push({
-                path: 'interface'
-              });
-            }
+            that.$refs.finish.$refs.done.show();
           }
 
           // this.$refs.networkAndAddress.hide();
@@ -192,24 +187,26 @@ export default {
           Toast.responseHandler(error, Toast.ERROR);
         });
     },
-    unlockWallet(e) {
+    unlockWallet() {
       // e.preventDefault();
       // e.stopPropagation();
       // this.spinner = true;
       const that = this;
       MnemonicWallet(this.verificationValues.join(' '), this.password)
         .then(wallet => {
-          const ciphertext = AES.encrypt(JSON.stringify(data), that.password).toString();
+          const ciphertext = AES.encrypt(
+            JSON.stringify(this.verificationValues.join(' ')),
+            that.password
+          ).toString();
           localStorage.setItem('ciphertext', ciphertext);
           this.password = '';
           // this.$refs.mnemonicPhrase.hide();
-          this.hardwareWalletOpen(wallet);
+          //this.hardwareWalletOpen(wallet);
           this.unlockWalletAction(wallet);
-
         })
         .catch(e => {
           //this.password = '';
-       
+
           this.error = e;
           console.log(e, 'eee');
           Toast.responseHandler(e, Toast.ERROR);
@@ -217,9 +214,7 @@ export default {
     },
     openFinish() {
       this.$refs.verification.$refs.verification.hide();
-      this.$refs.finish.$refs.done.show();
       this.unlockWallet();
-      
     },
     mnemonicVerificationModalOpen() {
       this.$refs.verification.$refs.verification.show();

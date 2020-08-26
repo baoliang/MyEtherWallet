@@ -78,13 +78,13 @@
   "wallet": {
     "create-new": "Create A New Wallet",
     "create": "Create Wallet",
-    "access-my": "Access My Wallet",
-    "access": "Access Wallet",
+    "access-my": "Import My Wallet",
+    "access": "Import Wallet",
     "unlock": "Unlock Wallet",
     "do-not-have": "Do not have a wallet?",
     "passphrase": "Passphrase",
     "own": "{nickname}'s wallet",
-    "login": "Login to access your wallet!"
+    "login": "Login to Import your wallet!"
   },
   "mewconnect": {
     "string": "MEWconnect",

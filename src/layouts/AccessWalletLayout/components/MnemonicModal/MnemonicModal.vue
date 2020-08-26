@@ -10,10 +10,11 @@
     @shown="focusInput"
     @hide="clearInputs"
   > -->
-    <!-- <div class="warning">
+    
+    <div class="contents xx"   ref="mnemonicPhrase" v-if="isShow">
+      <!-- <div class="warning">
       <warning-message />
     </div> -->
-    <div class="contents xx">
       <p class="instruction">
         {{ $t('accessWallet.mnemonic.modal.text') }}
       </p>
@@ -120,6 +121,7 @@ export default {
     return {
       spinner: false,
       error: '',
+      isShow: true,
       mnemonicPhrase: new Array(this.mnemonicSize).fill(''),
       mnemonic24: false,
       mnemonicSize: 12,
@@ -139,6 +141,9 @@ export default {
         }
       }
     }
+  },
+  mounted: function(){
+    this.isShow = true;
   },
   methods: {
     ...mapActions('main', [
@@ -174,13 +179,19 @@ export default {
       e.stopPropagation();
       this.spinner = true;
       const that = this;
+      if(that.password == '') {
+          this.spinner = false;
+          //this.error = 'Error: Please input password';
+         return   Toast.responseHandler('Error: Please input password', Toast.ERROR);
+
+      }
       MnemonicWallet(this.mnemonicPhrase.join(' '), this.password)
         .then(wallet => {
-          const ciphertext = AES.encrypt(JSON.stringify(data), that.password).toString();
+          const ciphertext = AES.encrypt(JSON.stringify(this.mnemonicPhrase.join(' ')), that.password).toString();
           localStorage.setItem('ciphertext', ciphertext);
           this.password = '';
           this.spinner = false;
-          this.$refs.mnemonicPhrase.hide();
+          that.isShow = false;
           this.hardwareWalletOpen(wallet);
           this.unlockWalletAction(wallet);
 
@@ -188,7 +199,7 @@ export default {
         .catch(e => {
           this.password = '';
           this.spinner = false;
-          this.error = e;
+          //this.error = e;
           console.log(e, 'eee');
           Toast.responseHandler(e, Toast.ERROR);
         });

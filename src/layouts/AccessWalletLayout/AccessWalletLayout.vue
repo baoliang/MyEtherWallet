@@ -43,17 +43,17 @@
         :web3-wallet-exists="web3WalletExists"
       /> -->
 
-      <software-modal
+      <!-- <software-modal
         ref="softwareModal"
         :open-password="passwordOpen"
         :open-private-key-input="privateKeyOpen"
         :open-mnemonic-phrase-input="mnemonicphraseModalOpen"
         @file="fileUploaded"
-      />
+      /> -->
 
-      <password-modal ref="passwordModal" :file="file" />
+      <!-- <password-modal ref="passwordModal" :file="file" />
 
-      <private-key-modal ref="privatekeyModal" />
+      <private-key-modal ref="privatekeyModal" /> -->
 
       <mnemonic-modal
         ref="mnemonicPhraseModal"
@@ -122,9 +122,9 @@ import AccessWalletButton from './components/AccessWalletButton';
 // import Web3WalletModal from './components/Web3WalletModal';
 // import MewConnectModal from './components/MewConnectModal';
 // import NetworkAndAddressModal from './components/NetworkAndAddressModal';
-import PasswordModal from './components/PasswordModal';
-import PrivateKeyModal from './components/PrivateKeyModal';
-import SoftwareModal from './components/SoftwareModal';
+// import PasswordModal from './components/PasswordModal';
+// import PrivateKeyModal from './components/PrivateKeyModal';
+// import SoftwareModal from './components/SoftwareModal';
 import MnemonicModal from './components/MnemonicModal';
 // import LedgerAppModal from './components/LedgerAppModal';
 import WalletPasswordModal from '@/components/WalletPasswordModal';
@@ -160,9 +160,9 @@ export default {
     // 'hardware-modal': HardwareModal,
     // 'hardware-password-modal': HardwarePasswordModal,
     // 'metamask-modal': Web3WalletModal,
-    'software-modal': SoftwareModal,
-    'password-modal': PasswordModal,
-    'private-key-modal': PrivateKeyModal,
+    // 'software-modal': SoftwareModal,
+    // 'password-modal': PasswordModal,
+    // 'private-key-modal': PrivateKeyModal,
     'mnemonic-modal': MnemonicModal,
     'access-wallet-button': AccessWalletButton,
     'wallet-password-modal': WalletPasswordModal,
@@ -248,10 +248,10 @@ export default {
      // this.checkWeb3();
      // this.checkIsMetamask();
     });
-    if(this.wallet) {
+    if (this.wallet) {
       this.$route.push('/interface');
     } else {
-      this.mnemonicphraseModalOpen();
+     // this.mnemonicphraseModalOpen();
      // this.passwordOpen();
     }
 
