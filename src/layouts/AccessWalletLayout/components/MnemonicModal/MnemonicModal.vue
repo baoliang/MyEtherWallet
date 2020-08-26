@@ -1,5 +1,5 @@
 <template>
-  <b-modal
+  <!-- <b-modal
     ref="mnemonicPhrase"
     :title="$t('accessWallet.mnemonic.modal.title')"
     hide-footer
@@ -9,11 +9,11 @@
     lazy
     @shown="focusInput"
     @hide="clearInputs"
-  >
+  > -->
     <!-- <div class="warning">
       <warning-message />
     </div> -->
-    <div class="contents">
+    <div class="contents xx">
       <p class="instruction">
         {{ $t('accessWallet.mnemonic.modal.text') }}
       </p>
@@ -87,7 +87,7 @@
       </form>
       <!-- <customer-support /> -->
     </div>
-  </b-modal>
+  <!-- </b-modal> -->
 </template>
 
 <script>
@@ -214,4 +214,8 @@ export default {
 @import 'MnemonicModal-desktop.scss';
 @import 'MnemonicModal-tablet.scss';
 @import 'MnemonicModal-mobile.scss';
+.xx {
+  max-width: 480px;
+  margin: auto;
+}
 </style>

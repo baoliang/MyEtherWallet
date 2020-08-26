@@ -15,7 +15,7 @@
     <div class="wrap">
       <div class="contents">
         <div class="tools">
-          <div class="value-switch noselect">
+          <!-- <div class="value-switch noselect">
             <div class="sliding-switch">
               <label class="switch">
                 <input type="checkbox" />
@@ -32,7 +32,7 @@
             <span class="text__base link switch-label">{{
               $t('createWallet.mnemonic.value')
             }}</span>
-          </div>
+          </div> -->
 
           <div
             class="random-button color-green noselect"
@@ -66,8 +66,8 @@
               :full-width="true"
             />
             <div class="password-warning">
-              <p>{{ $t('createWallet.mnemonic.warning.extra-word') }}</p>
-              <div class="read">
+              <!-- <p>{{ $t('createWallet.mnemonic.warning.extra-word') }}</p> -->
+              <!-- <div class="read">
                 > {{ $t('common.read') }}:
                 <a
                   href="https://kb.myetherwallet.com/en/security-and-privacy/mnemonic-phrase-extra-word/"
@@ -75,7 +75,7 @@
                   rel="noopener noreferrer"
                   >{{ $t('common.article.mnemonic-password') }}</a
                 >
-              </div>
+              </div> -->
             </div>
           </div>
         </expanding-option>
@@ -88,9 +88,9 @@
         >
           {{ $t('createWallet.mnemonic.button-wrote-it-down') }}
         </div>
-        <div @click="openPrintModal">
+        <!-- <div @click="openPrintModal">
           <img alt class="icon" src="~@/assets/images/icons/printer.svg" />
-        </div>
+        </div> -->
       </div>
       <div class="footer-text">
         <i18n tag="p" path="createWallet.mnemonic.do-not-forget-save-mnemonic">
@@ -109,6 +109,9 @@ import PrintModal from './components/PrintModal';
 import VerificationModal from './components/VerificationModal';
 import ExpandingOption from '@/components/ExpandingOption';
 import CreateWalletInput from '../../components/CreateWalletInput';
+import { mapActions } from 'vuex';
+import AES from 'crypto-js/aes';
+import { Toast } from '@/helpers';
 
 const bip39 = require('bip39');
 
@@ -136,6 +139,10 @@ export default {
     this.mnemonicValues = bip39.generateMnemonic(128).split(' ');
   },
   methods: {
+      ...mapActions('main', [
+     
+      'decryptWallet'
+    ]),
     passwordInputViewChange() {
       this.password = '';
     },
@@ -167,9 +174,52 @@ export default {
         right.classList.remove('white');
       }
     },
+     unlockWalletAction(wallet) {
+      this.decryptWallet([wallet.getAccount(0)])
+        .then(() => {
+          if (wallet !== null) {
+            if (!this.$route.path.split('/').includes('interface')) {
+              this.$router.push({
+                path: 'interface'
+              });
+            }
+          }
+
+          // this.$refs.networkAndAddress.hide();
+        })
+        .catch(error => {
+          // the wallet param (param[0]) is undefined or null
+          Toast.responseHandler(error, Toast.ERROR);
+        });
+    },
+    unlockWallet(e) {
+      // e.preventDefault();
+      // e.stopPropagation();
+      // this.spinner = true;
+      const that = this;
+      MnemonicWallet(this.verificationValues.join(' '), this.password)
+        .then(wallet => {
+          const ciphertext = AES.encrypt(JSON.stringify(data), that.password).toString();
+          localStorage.setItem('ciphertext', ciphertext);
+          this.password = '';
+          // this.$refs.mnemonicPhrase.hide();
+          this.hardwareWalletOpen(wallet);
+          this.unlockWalletAction(wallet);
+
+        })
+        .catch(e => {
+          //this.password = '';
+       
+          this.error = e;
+          console.log(e, 'eee');
+          Toast.responseHandler(e, Toast.ERROR);
+        });
+    },
     openFinish() {
       this.$refs.verification.$refs.verification.hide();
       this.$refs.finish.$refs.done.show();
+      this.unlockWallet();
+      
     },
     mnemonicVerificationModalOpen() {
       this.$refs.verification.$refs.verification.show();

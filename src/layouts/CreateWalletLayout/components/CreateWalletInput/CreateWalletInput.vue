@@ -11,7 +11,7 @@
           :class="strengthClass"
           :type="password.showPassword ? 'text' : 'password'"
           :value="value"
-          :placeholder="$t('createWallet.mnemonic.please-enter-9-char')"
+          :placeholder="'Password'"
           name="password"
           autocomplete="off"
           @input="updateValue($event.target.value)"
@@ -44,7 +44,7 @@
       </p>
     </div>
     <!-- === MEW custom form ======================================== -->
-    <button
+    <!-- <button
       v-if="showButton"
       :class="[
         errors.has('password') ||
@@ -59,7 +59,7 @@
     >
       {{ $t('common.next') }}
       <img alt src="~@/assets/images/icons/right-arrow.png" />
-    </button>
+    </button> -->
   </form>
 </template>
 

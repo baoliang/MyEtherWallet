@@ -1,6 +1,6 @@
 <template>
   <div class="your-password">
-    <tutorial-modal ref="tutorialModal" :skip="skip" />
+    <!-- <tutorial-modal ref="tutorialModal" :skip="skip" /> -->
     <scan-to-download-modal ref="scanToDownloadModal" />
     <ipad-modal ref="ipadModal" />
     <by-json-page-title />
@@ -115,10 +115,10 @@
             </b-tab>
           </b-tabs>
         </div>
-        <by-json-file-container
+        <!-- <by-json-file-container
           v-if="byJson && !byMnemonic"
           :password="password"
-        />
+        /> -->
         <by-mnemonic-container v-if="!byJson && byMnemonic" />
       </div>
     </div>
@@ -128,9 +128,9 @@
 
 <script>
 import WarningMessage from '@/components/WarningMessage';
-import ByJsonFileContainer from './containers/ByJsonFileContainer';
+// import ByJsonFileContainer from './containers/ByJsonFileContainer';
 import ByMnemonicContainer from './containers/ByMnemonicContainer';
-import TutorialModal from './components/TutorialModal';
+// import TutorialModal from './components/TutorialModal';
 import ScanToDownloadModal from './components/ScanToDownloadModal';
 // import CreateWalletInput from './components/CreateWalletInput';
 // import CreateWalletInputFooter from './components/CreateWalletInputFooter';
@@ -143,9 +143,9 @@ import platform from 'platform';
 
 export default {
   components: {
-    'by-json-file-container': ByJsonFileContainer,
+    // 'by-json-file-container': ByJsonFileContainer,
     'by-mnemonic-container': ByMnemonicContainer,
-    'tutorial-modal': TutorialModal,
+    // 'tutorial-modal': TutorialModal,
     'scan-to-download-modal': ScanToDownloadModal,
     'by-json-page-title': PageTitle,
     // 'create-wallet-input': CreateWalletInput,
@@ -179,7 +179,7 @@ export default {
       skipTutorial === null ||
       skipTutorial === false
     ) {
-      this.$refs.tutorialModal.$refs.tutorial.show();
+    //  this.$refs.tutorialModal.$refs.tutorial.show();
     }
   },
   methods: {

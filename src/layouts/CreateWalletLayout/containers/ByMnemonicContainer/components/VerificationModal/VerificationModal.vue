@@ -33,11 +33,12 @@
       <div v-if="password.length > 0" class="mt-5 extra-word-container">
         <form>
           <label for="extraWordInput">
-            {{ $t('createWallet.mnemonic.extra-word') }}
+            Password
+            <!-- {{ $t('createWallet.mnemonic.extra-word') }} -->
           </label>
           <input
             v-model="inputPassword"
-            :placeholder="$t('createWallet.mnemonic.type-in')"
+            :placeholder="''"
             type="password"
             name="extraWordInput"
             autocomplete="off"

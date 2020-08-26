@@ -4,24 +4,24 @@
     class="expanding-option"
   >
     <div class="title-bar-container">
-      <div class="input-title">{{ title }}</div>
-      <popover v-if="popover" :popcontent="popover" />
-      <div v-if="buttonText !== '' && !showEnable" class="button-text">
+      <div class="input-title">Password</div>
+      <!-- <popover v-if="popover" :popcontent="popover" /> -->
+      <!-- <div v-if="buttonText !== '' && !showEnable" class="button-text">
         {{ buttonText }}
-      </div>
-      <div v-if="showEnable && !expanded" class="button-text">
+      </div> -->
+      <!-- <div v-if="showEnable && !expanded" class="button-text">
         {{ buttonText }}
-      </div>
-      <div v-if="showEnable && expanded" class="button-text">
+      </div> -->
+      <!-- <div v-if="showEnable && expanded" class="button-text">
         {{ $t('common.yes') }}
-      </div>
+      </div> -->
       <!-- Rounded switch -->
-      <div class="switch sliding-switch-white">
+      <!-- <div class="switch sliding-switch-white">
         <label class="switch">
           <input type="checkbox" @click="optionExpanded" />
           <span class="slider round" />
         </label>
-      </div>
+      </div> -->
     </div>
 
     <div :class="expanded ? 'expanded' : ''" class="contnet-container">
@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      expanded: false
+      expanded: true
     };
   },
   methods: {

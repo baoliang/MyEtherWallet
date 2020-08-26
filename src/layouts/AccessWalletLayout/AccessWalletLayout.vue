@@ -251,7 +251,8 @@ export default {
     if(this.wallet) {
       this.$route.push('/interface');
     } else {
-      this.passwordOpen();
+      this.mnemonicphraseModalOpen();
+     // this.passwordOpen();
     }
 
 
