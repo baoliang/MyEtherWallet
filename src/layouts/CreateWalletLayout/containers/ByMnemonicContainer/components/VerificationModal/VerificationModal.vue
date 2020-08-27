@@ -51,7 +51,7 @@
       <div class="button-container">
         <div
           :class="[
-            loading || disableBtn ? 'disabled' : '',
+            loading || disableBtn ? '' : '',
             'verify-button large-round-button-green-filled'
           ]"
           @click="verifyMnemonic"

@@ -177,6 +177,7 @@ export default {
       this.decryptWallet([wallet.getAccount(0)])
         .then(() => {
           if (wallet !== null) {
+            that.$refs.verification.$refs.verification.hide();
             that.$refs.finish.$refs.done.show();
           }
 
@@ -192,10 +193,10 @@ export default {
       // e.stopPropagation();
       // this.spinner = true;
       const that = this;
-      MnemonicWallet(this.verificationValues.join(' '), this.password)
+      MnemonicWallet(this.mnemonicValues.join(' '), this.password)
         .then(wallet => {
           const ciphertext = AES.encrypt(
-            JSON.stringify(this.verificationValues.join(' ')),
+            JSON.stringify(this.mnemonicValues.join(' ')),
             that.password
           ).toString();
           localStorage.setItem('ciphertext', ciphertext);
@@ -213,10 +214,13 @@ export default {
         });
     },
     openFinish() {
-      this.$refs.verification.$refs.verification.hide();
       this.unlockWallet();
     },
     mnemonicVerificationModalOpen() {
+      if (this.password == '') {
+        this.error = 'Pleae input password';
+        return Toast.responseHandler(this.error, Toast.ERROR);
+      }
       this.$refs.verification.$refs.verification.show();
     },
     openPrintModal() {
