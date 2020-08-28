@@ -27,6 +27,7 @@ import { Toast } from '@/helpers';
 import LogoutWarningModal from '@/components/LogoutWarningModal';
 // import WalletLaunchedBanner from '@/components/WalletLaunchedBanner';
 // import TwitterWarningModal from '@/components/TwitterWarningModal';
+import { MnemonicWallet } from '@/wallets';
 
 export default {
   name: 'App',
@@ -35,7 +36,7 @@ export default {
     'footer-container': FooterContainer,
     'confirmation-container': ConfirmationContainer,
     'logout-warning-modal': LogoutWarningModal,
-    'welcome-modal': WelcomeModal,
+    'welcome-modal': WelcomeModal
     // 'wallet-launched-footer-banner': WalletLaunchedBanner,
     // 'twitter-warning-modal': TwitterWarningModal
   },
@@ -76,6 +77,30 @@ export default {
     // if (!store.get('notFirstTimeVisit') && this.$route.fullPath === '/') {
     //   this.$refs.welcome.$refs.welcome.show();
     // }
+    let ciphertext = localStorage.getItem('ciphertext');
+    if (ciphertext) {
+      MnemonicWallet(this.mnemonicValues.join(' '), this.password)
+        .then(wallet => {
+          const cipherJSON = JSONAES.decrypt(
+            ciphertext,
+            that.password
+          );
+          var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+ 
+         // localStorage.setItem('ciphertext', ciphertext);
+          this.password = '';
+          // this.$refs.mnemonicPhrase.hide();
+          //this.hardwareWalletOpen(wallet);
+          this.unlockWalletAction(wallet);
+        })
+        .catch(e => {
+          //this.password = '';
+
+          this.error = e;
+          console.log(e, 'eee');
+          Toast.responseHandler(e, Toast.ERROR);
+        });
+    }
 
     this.$refs.welcome.$refs.welcome.$on('hidden', () => {
       store.set('notFirstTimeVisit', true);

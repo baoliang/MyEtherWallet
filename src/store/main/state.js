@@ -21,7 +21,6 @@ if (BUILD_TYPE !== MEW_CX && storedNetwork !== undefined) {
     }
   }
 }
-
 const addressBook =
   store.get('addressBook') !== undefined ? store.get('addressBook') : [];
 const notifications =
