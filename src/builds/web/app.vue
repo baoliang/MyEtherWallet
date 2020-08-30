@@ -8,6 +8,12 @@
         !$route.fullPath.includes('/dapp-submission')
       "
     />
+    <password-modal
+      ref="passwordModal"
+      v-if="isShow && !wallet"
+      :hardware-wallet-open="hardwareWalletOpen"
+    />
+
     <welcome-modal ref="welcome" />
     <router-view />
     <footer-container />
@@ -17,6 +23,8 @@
 </template>
 
 <script>
+import PasswordModal from '@/layouts/AccessWalletLayout/components/PasswordModal';
+
 import FooterContainer from '@/containers/FooterContainer';
 import HeaderContainer from '@/containers/HeaderContainer';
 import ConfirmationContainer from '@/containers/ConfirmationContainer';
@@ -28,6 +36,10 @@ import LogoutWarningModal from '@/components/LogoutWarningModal';
 // import WalletLaunchedBanner from '@/components/WalletLaunchedBanner';
 // import TwitterWarningModal from '@/components/TwitterWarningModal';
 import { MnemonicWallet } from '@/wallets';
+import AES from 'crypto-js/aes';
+
+
+const CryptoJS = require('crypto-js');
 
 export default {
   name: 'App',
@@ -36,9 +48,17 @@ export default {
     'footer-container': FooterContainer,
     'confirmation-container': ConfirmationContainer,
     'logout-warning-modal': LogoutWarningModal,
-    'welcome-modal': WelcomeModal
+    'welcome-modal': WelcomeModal,
+    'password-modal': PasswordModal
+
     // 'wallet-launched-footer-banner': WalletLaunchedBanner,
     // 'twitter-warning-modal': TwitterWarningModal
+  },
+  data() {
+    return {
+      isShow: false,
+      file: {}
+    }
   },
   computed: {
     ...mapState('main', ['wallet', 'online'])
@@ -77,29 +97,17 @@ export default {
     // if (!store.get('notFirstTimeVisit') && this.$route.fullPath === '/') {
     //   this.$refs.welcome.$refs.welcome.show();
     // }
-    let ciphertext = localStorage.getItem('ciphertext');
-    if (ciphertext) {
-      MnemonicWallet(this.mnemonicValues.join(' '), this.password)
-        .then(wallet => {
-          const cipherJSON = JSONAES.decrypt(
-            ciphertext,
-            that.password
-          );
-          var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
- 
-         // localStorage.setItem('ciphertext', ciphertext);
-          this.password = '';
-          // this.$refs.mnemonicPhrase.hide();
-          //this.hardwareWalletOpen(wallet);
-          this.unlockWalletAction(wallet);
-        })
-        .catch(e => {
-          //this.password = '';
+    const ciphertext = localStorage.getItem('ciphertext');
+    if (ciphertext && this.$route.path == '/' && !this.wallet) {
+      
+       this.isShow = true;
+    } 
+    if (ciphertext && this.$route.path != '/' && !this.wallet) {
+             this.isShow = true;
 
-          this.error = e;
-          console.log(e, 'eee');
-          Toast.responseHandler(e, Toast.ERROR);
-        });
+          this.$router.push({
+                path: '/'
+          });
     }
 
     this.$refs.welcome.$refs.welcome.$on('hidden', () => {
@@ -115,8 +123,39 @@ export default {
     window.removeEventListener('offline');
     window.removeEventListener('online');
   },
+
   methods: {
-    ...mapActions('main', ['checkIfOnline'])
+    ...mapActions('main', ['checkIfOnline', 'decryptWallet']),
+    hardwareWalletOpen(password) {
+      const that = this;
+      const ciphertext = localStorage.getItem('ciphertext');
+
+      const bytes = AES.decrypt(ciphertext, password);
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      MnemonicWallet(decryptedData, password)
+        .then(wallet => {
+          if (wallet !== null) {
+            Toast.responseHandler('Error', Toast.ERROR);
+          }
+          that
+            .decryptWallet([wallet.getAccount(0)])
+            .then(() => {
+              this.$router.push({
+                path: 'interface'
+              });
+            })
+            .catch(error => {
+              Toast.responseHandler(error, Toast.ERROR);
+            });
+        })
+        .catch(e => {
+          //this.password = '';
+
+          this.error = e;
+          console.log(e, 'eee');
+          Toast.responseHandler(e, Toast.ERROR);
+        });
+    }
   }
 };
 </script>

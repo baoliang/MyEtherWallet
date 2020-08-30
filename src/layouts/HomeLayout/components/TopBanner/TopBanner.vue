@@ -1,6 +1,6 @@
 <template>
   <div class="top-banner">
-    <div class="wrap">
+    <div class="wrap" v-if="!ciphertext">
       <div class="page-container">
         <!-- <div class="flex-col-vertical-center banner">
           <div class="banner-text">
@@ -86,7 +86,9 @@
 import { mapState } from 'vuex';
 export default {
   data() {
-    return {};
+    return {
+      ciphertext: localStorage.getItem('ciphertext')
+    };
   },
   computed: {
     ...mapState('main', ['wallet'])

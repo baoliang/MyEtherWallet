@@ -1,5 +1,5 @@
 <template>
-  <b-modal
+  <!-- <b-modal
     ref="password"
     :title="$t('common.password.string')"
     hide-footer
@@ -8,11 +8,11 @@
     static
     lazy
     @shown="focusInput"
-  >
-    <div>
-      <div class="warning">
+  > -->
+    <div >
+      <!-- <div class="warning">
         <warning-message />
-      </div>
+      </div> -->
       <form class="password-form">
         <div class="input-container">
           <input
@@ -40,14 +40,14 @@
           :disabled="inputValid"
           class="submit-button large-round-button-green-filled"
           type="submit"
-          @click.prevent="unlockWallet"
+          @click.prevent="unlockWalletAction"
         >
-          <span v-show="!spinner">{{ $t('common.wallet.access') }}</span>
+          <span v-show="!spinner">Confirm</span>
           <i v-show="spinner" class="fa fa-spin fa-spinner fa-lg" />
         </button>
       </form>
     </div>
-  </b-modal>
+  <!-- </b-modal> -->
 </template>
 
 <script>
@@ -56,13 +56,18 @@ import { KEYSTORE as keyStoreType } from '@/wallets/bip44/walletTypes';
 import walletWorker from 'worker-loader!@/workers/wallet.worker.js';
 import { mapState, mapActions } from 'vuex';
 import { Toast, Wallet } from '@/helpers';
-import WarningMessage from '@/components/WarningMessage';
+// import WarningMessage from '@/components/WarningMessage';
 
 export default {
   components: {
-    'warning-message': WarningMessage
+    // 'warning-message': WarningMessage
   },
+
   props: {
+    hardwareWalletOpen: {
+      type: Function,
+      default: function () {}
+    },
     file: {
       type: Object,
       default: function () {
@@ -72,6 +77,7 @@ export default {
   },
   data() {
     return {
+      isShow: false,
       show: false,
       password: '',
       spinner: false
@@ -92,6 +98,9 @@ export default {
       this.error = '';
     }
   },
+  mounted (){
+    this.isShow =  true;
+  },
   methods: {
     ...mapActions('main', ['decryptWallet']),
     walletRequirePass(ethjson) {
@@ -103,6 +112,9 @@ export default {
       else if (ethjson.publisher == 'MyEtherWallet' && !ethjson.encrypted)
         return false;
       return true;
+    },
+    unlockWalletAction() {
+      this.hardwareWalletOpen(this.password);
     },
     unlockWallet() {
       this.spinner = true;
@@ -149,6 +161,7 @@ export default {
         );
       }
     },
+
     setUnlockedWallet(wallet) {
       this.decryptWallet([wallet]).then(() => {
         this.spinner = false;

@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import WarningMessage from '@/components/WarningMessage';
+// import WarningMessage from '@/components/WarningMessage';
 // import ByJsonFileContainer from './containers/ByJsonFileContainer';
 import ByMnemonicContainer from './containers/ByMnemonicContainer';
 // import TutorialModal from './components/TutorialModal';
@@ -152,7 +152,7 @@ export default {
     // 'create-wallet-input-footer': CreateWalletInputFooter,
     // 'by-json-page-footer': PageFooter,
     'ipad-modal': IpadModal,
-    'warning-message': WarningMessage
+    // 'warning-message': WarningMessage
   },
   data() {
     return {
