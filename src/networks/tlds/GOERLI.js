@@ -1367,7 +1367,7 @@ export default [
   'xn--y9a3aq.   հայ',
   'xn--yfro4i67o.   新加坡',
   'xn--zfr164b.   政务',
-  'xxx',
+  'SKT',
   'xyz',
   'yachts',
   'yahoo',

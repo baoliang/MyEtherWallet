@@ -66,7 +66,7 @@
                     "
                     alt
                   /> -->
-                  Xxx
+                  SKT
                 </div>
               </router-link>
               <div class="top-menu">

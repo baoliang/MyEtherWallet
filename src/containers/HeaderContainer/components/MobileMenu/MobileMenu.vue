@@ -30,7 +30,7 @@
             class="logo"
             alt
           /> -->
-          Xxx
+          SKT
         </div>
       </router-link>
       <div class="mobile-menu-button--container">

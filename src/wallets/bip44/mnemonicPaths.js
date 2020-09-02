@@ -26,6 +26,7 @@ import {
   solidum,
   metadium,
   dexon,
+  skt,
   lightstreamsNetwork,
   mintmeComCoin,
   ethercore,
@@ -35,6 +36,7 @@ const renamedLedger = Object.assign({}, ledgerEthereum);
 renamedLedger.label = 'Ledger';
 
 export default [
+  skt,
   ethereum,
   ethereumClassic,
   ropsten,
