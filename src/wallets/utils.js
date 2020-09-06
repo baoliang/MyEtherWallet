@@ -1,10 +1,29 @@
 import { bufferToInt } from 'ethereumjs-util';
+const bs58 = require('bs58');
+const Buffer = require('buffer/').Buffer;  // note: the trailing slash is important!
+const CkBuffer = require('checksum-buffer');
+// const crypto = require('crypto');
 
 const getBufferFromHex = hex => {
   hex = sanitizeHex(hex);
   const _hex = hex.toLowerCase().replace('0x', '');
   return new Buffer(_hex, 'hex');
 };
+
+const getSktAddress =  (pubkey, version) => {
+  //let b = Buffer.alloc(1+len(pubkey)+4)
+  //b := make([]byte, 0, 1+len(pubkey)+4)
+  const bufA = Buffer.concat([version, pubkey], version.length+pubkey.length);
+  //b.append(version)
+//	b = append(b, version)
+	//b = append(b, pubkey[:]...)
+  const cksum = new CkBuffer(bufA, 'sha256',4);
+  const bufB = Buffer.concat([Buffer, cksum], cksum.length+bufA.length);
+
+//	b = append(b, cksum[:]...)
+  return bs58.encode(bufB)
+
+}
 const padLeftEven = hex => {
   hex = hex.length % 2 != 0 ? '0' + hex : hex;
   return hex;
@@ -58,5 +77,6 @@ export {
   sanitizeHex,
   padLeftEven,
   getHexTxObject,
-  calculateChainIdFromV
+  calculateChainIdFromV,
+  getSktAddress
 };

@@ -1,6 +1,6 @@
 const skt = {
   path: "m/44'/297'/0'/0",
-  label: 'Ethereum'
+  label: 'SKT'
 };
 const ethereum = {
   path: "m/44'/60'/0'/0",
