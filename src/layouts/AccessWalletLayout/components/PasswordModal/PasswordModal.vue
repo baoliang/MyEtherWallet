@@ -39,11 +39,11 @@
         <button
           :disabled="inputValid"
           class="submit-button large-round-button-green-filled"
-          type="submit"
-          @click.prevent="unlockWalletAction"
+          type="button"
+          @click="unlockWalletAction"
         >
           <span v-show="!spinner">Confirm</span>
-          <i v-show="spinner" class="fa fa-spin fa-spinner fa-lg" />
+          <!-- <i v-show="spinner" class="fa fa-spin fa-spinner fa-lg" /> -->
         </button>
       </form>
     </div>

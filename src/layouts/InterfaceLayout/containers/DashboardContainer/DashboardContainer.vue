@@ -7,86 +7,10 @@
         </div>
         <div class="buttons">
           <button-send-tx :go-to="goTo" class="clickable" />
-          <button-nft-manager
-            :disabled="!isOnlineAndEth"
-            :go-to="goTo"
-            class="clickable"
-          />
         </div>
       </div>
 
-      <div class="container--card block--swap">
-        <div class="flex--row--align-center title">
-          <h4>{{ $t('common.swap') }}</h4>
-          <button
-            class="title-button prevent-user-select"
-            @click="goTo('swap')"
-          >
-            {{ $t('common.more') }}
-          </button>
-        </div>
-        <p class="section-description">
-          {{ $t('interface.dashboard-swap') }}
-        </p>
-        <div class="swap-info">
-          <div v-for="pair in swapPairs" :key="pair.from + pair.to">
-            <div
-              :class="isOnlineAndEth ? 'swap-enabled' : 'swap-disabled'"
-              class="swap-to clickable"
-              @click.prevent="showSwapWidget(pair)"
-            >
-              <p class="monospace">
-                {{ pair.amt }} {{ pair.from }} / {{ pair.rate }} {{ pair.to }}
-              </p>
-              <div class="margin--left--auto flex--row--align-center">
-                <span v-if="!getIcon(pair.from)" class="currency-symbol">
-                  <img :src="iconFetcher(pair.from)" class="icon-image" />
-                </span>
-                <span
-                  v-if="getIcon(pair.from)"
-                  :class="['currency-symbol', 'cc', pair.from, 'cc-icon']"
-                ></span>
-                <img src="@/assets/images/icons/swap-widget.svg" alt />
-                <span v-if="!getIcon(pair.to)" class="currency-symbol">
-                  <img :src="iconFetcher(pair.to)" class="icon-image" />
-                </span>
-                <span
-                  v-if="getIcon(pair.to)"
-                  :class="['currency-symbol', 'cc', pair.to, 'cc-icon']"
-                ></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container--card bottom--buttons">
-      <div class="block--dapps">
-        <div class="flex--row--align-center title">
-          <h4>{{ $t('common.dapps') }}</h4>
-          <button
-            class="title-button prevent-user-select"
-            @click="goTo('dapps')"
-          >
-            {{ $t('interface.view-all') }}
-          </button>
-        </div>
-        <div class="block--container">
-          <dapp-buttons
-            v-for="dapp in sortedObject"
-            :key="dapp.title"
-            :title="$t(dapp.title)"
-            :icon="dapp.icon"
-            :icon-disabled="dapp.iconDisabled"
-            :desc="$t(dapp.desc)"
-            :param="dapp.route"
-            :release-date="dapp.releaseDate"
-            :supported-networks="dapp.supportedNetworks"
-            class="dapp"
-          />
-        </div>
-      </div>
+    
     </div>
   </div>
 </template>
@@ -94,13 +18,9 @@
 <script>
 import { mapState } from 'vuex';
 import tabsConfig from '../../components/InterfaceSideMenu/InterfaceSideMenu.config';
-import DappButtons from '../../components/DappButtons';
-import dapps from '@/dapps';
-import ButtonNftManager from './components/ButtonNftManager';
 import ButtonSendTx from './components/ButtonSendTx';
 import { hasIcon } from '@/partners';
 
-import { SwapProviders, providers } from '@/partners';
 import BigNumber from 'bignumber.js';
 
 const toBigNumber = num => {
@@ -109,8 +29,6 @@ const toBigNumber = num => {
 
 export default {
   components: {
-    'dapp-buttons': DappButtons,
-    'button-nft-manager': ButtonNftManager,
     'button-send-tx': ButtonSendTx
   },
   props: {
@@ -150,18 +68,18 @@ export default {
         { from: 'BAT', to: 'ETH', amt: 1, rate: 0 },
         { from: 'ETH', to: 'DAI', amt: 1, rate: 0 }
       ],
-      swap: new SwapProviders(
-        providers,
-        {
-          network: this.$store.state.main.network.type.name,
-          web3: this.$store.state.main.web3,
-          getRateForUnit: false
-        },
-        {
-          tokensWithBalance: this.tokensWithBalance,
-          online: this.$store.state.main.online
-        }
-      ),
+      // swap: new SwapProviders(
+      //   providers,
+      //   {
+      //     network: this.$store.state.main.network.type.name,
+      //     web3: this.$store.state.main.web3,
+      //     getRateForUnit: false
+      //   },
+      //   {
+      //     tokensWithBalance: this.tokensWithBalance,
+      //     online: this.$store.state.main.online
+      //   }
+      // ),
       updatingRates: false,
       suppliedFrom: {
         symbol: 'ETH',
@@ -192,7 +110,8 @@ export default {
       return actualReturnedDapp;
     },
     isOnlineAndEth() {
-      return this.online && this.network.type.name === 'ETH';
+      return true;
+      //return this.online && this.network.type.name === 'ETH';
     }
   },
   watch: {
@@ -220,11 +139,11 @@ export default {
     }
   },
   mounted() {
-    if (this.online && this.network.type.name === 'ETH') {
-      this.showSwapValues = true;
-    } else {
-      this.showSwapValues = false;
-    }
+    // if (this.online && this.network.type.name === 'ETH') {
+    //   this.showSwapValues = true;
+    // } else {
+    //   this.showSwapValues = false;
+    // }
   },
   methods: {
     iconFetcher(currency) {

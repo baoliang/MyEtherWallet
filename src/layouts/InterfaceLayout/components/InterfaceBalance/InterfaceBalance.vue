@@ -15,7 +15,7 @@
               <p>
                 {{ balance }}
                 <span>
-                  {{ network.type.currencyName }}
+                  SKT
                 </span>
               </p>
             </div>
@@ -23,13 +23,7 @@
           </div>
         </div>
         <div class="icon-container">
-          <b-btn
-            id="balanceCheck"
-            class="custom-tooltip"
-            @click="balanceModalOpen"
-          >
-            <img alt src="~@/assets/images/icons/more.svg" />
-          </b-btn>
+         
           <b-btn
             id="refreshBalance"
             class="custom-tooltip"

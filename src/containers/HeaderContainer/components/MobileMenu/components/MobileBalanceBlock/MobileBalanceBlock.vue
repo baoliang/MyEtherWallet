@@ -48,10 +48,9 @@
 import { mapState, mapActions } from 'vuex';
 import { Toast } from '@/helpers';
 import BigNumber from 'bignumber.js';
-import InterfaceBalanceModal from '@/layouts/InterfaceLayout/components/InterfaceBalanceModal';
 
 export default {
-  components: { 'interface-balance-modal': InterfaceBalanceModal },
+  components: {  },
   data() {
     return {
       equivalentValues: [
@@ -119,7 +118,7 @@ export default {
       }
     },
     async fetchBalanceData() {
-      if (this.online) {
+      if (!this.online) {
         const newArr = [];
         const url = 'https://cryptorates.mewapi.io/convert/ETH';
         const fetchValues = await fetch(url);

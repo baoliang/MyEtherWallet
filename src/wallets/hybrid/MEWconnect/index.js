@@ -1,4 +1,4 @@
-import MEWconnect from '@myetherwallet/mewconnect-web-client';
+// import MEWconnect from '@myetherwallet/mewconnect-web-client';
 import store from '@/store';
 import { Transaction } from 'ethereumjs-tx';
 import { MEW_CONNECT as mewConnectType } from '../../bip44/walletTypes';
@@ -22,13 +22,13 @@ class MEWconnectWallet {
   constructor() {
     this.identifier = mewConnectType;
     this.isHardware = IS_HARDWARE;
-    this.mewConnect = new MEWconnect.Initiator({
-      v1Url: V1_SIGNAL_URL,
-      v2Url: V2_SIGNAL_URL
-    });
-    this.mewConnect.disconnect = () => {
-      this.mewConnect.disconnectRTC();
-    };
+    // this.mewConnect = new MEWconnect.Initiator({
+    //   v1Url: V1_SIGNAL_URL,
+    //   v2Url: V2_SIGNAL_URL
+    // });
+    // this.mewConnect.disconnect = () => {
+    //   this.mewConnect.disconnectRTC();
+    // };
   }
   async init(qrcode) {
     this.mewConnect.on('codeDisplay', qrcode);

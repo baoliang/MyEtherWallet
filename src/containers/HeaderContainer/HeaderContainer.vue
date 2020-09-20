@@ -22,12 +22,7 @@
 
       <!-- Modals ***************************************** -->
       <disconnected-modal ref="mewConnectDisconnected" />
-      <settings-modal
-        v-if="address !== null"
-        ref="settings"
-        :gas-price="gasPrice"
-        :address="address"
-      />
+  
       <logout-modal ref="logout" />
       <!-- <issue-log-modal ref="issuelog" :error="error" :resolver="resolver" /> -->
 
@@ -109,59 +104,9 @@
                     <template slot="button-content">
                       <p>{{ $t('interface.tx-history') }}</p>
                     </template>
-                    <b-dropdown-item :href="explorerUrl" target="_blank">
-                      <p>{{ serviceUrl }} ({{ network.type.name }})</p>
-                    </b-dropdown-item>
-                    <b-dropdown-item
-                      v-show="network.type.name === 'ETH'"
-                      :href="'https://ethplorer.io/address/' + address"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >{{ $t('header.ethplorer') }} ({{
-                        $tc('common.token', 2)
-                      }})</b-dropdown-item
-                    >
+                   
                   </b-nav-item-dropdown>
-                  <!-- <div v-show="!isMewCx" class="language-menu-container">
-                    <div class="down-arrow"></div>
-                    <b-nav-item-dropdown
-                      class="language-menu"
-                      extra-toggle-classes="nav-link-custom"
-                      right
-                    >
-                      <template slot="button-content">
-                        <div class="current-language-flag">
-                          <img
-                            v-if="currentFlag !== null"
-                            :src="
-                              require(`@/assets/images/flags/${currentFlag}.svg`)
-                            "
-                            alt
-                            class="show"
-                          />
-                          <p>{{ currentName }}</p>
-                        </div>
-                      </template>
-                      <b-dropdown-item
-                        v-for="language in supportedLanguages"
-                        :key="language.key"
-                        :active="$root._i18n.locale === language.langCode"
-                        :data-language-code="language.langCode"
-                        :data-flag-name="language.flag"
-                        @click="languageItemClicked(language)"
-                        >{{ language.name }}</b-dropdown-item
-                      >
-                    </b-nav-item-dropdown>
-                  </div> -->
-                  <!-- <div class="notification-menu-container">
-                    <notification
-                      v-if="
-                        $route.fullPath.includes('view-wallet-info') ||
-                        $route.fullPath.includes('interface')
-                      "
-                      ref="notification"
-                    />
-                  </div> -->
+                 
                   <b-nav-item
                     v-if="showButtons && !isPageOnTop && !isMewCx"
                     :class="[
@@ -233,7 +178,6 @@ import { Misc, Toast } from '@/helpers';
 import Blockie from '@/components/Blockie';
 // import NotificationsContainer from '@/containers/NotificationsContainer';
 // import UserReminderButton from '@/components/UserReminderButton';
-import SettingsModal from '@/components/SettingsModal';
 import LogoutModal from '@/components/LogoutModal';
 // import IssueLogModal from '@/components/IssueLogModal';
 import BigNumber from 'bignumber.js';
@@ -253,7 +197,6 @@ export default {
   components: {
     blockie: Blockie,
     // notification: NotificationsContainer,
-    'settings-modal': SettingsModal,
     'logout-modal': LogoutModal,
     // 'issue-log-modal': IssueLogModal,
     // 'user-reminder-button': UserReminderButton,

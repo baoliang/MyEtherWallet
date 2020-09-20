@@ -241,6 +241,14 @@ export default {
     ...mapState('main', ['Networks', 'online', 'wallet'])
   },
   mounted() {
+      const ciphertext = localStorage.getItem('ciphertext');
+  
+    if (ciphertext &&  !this.wallet) {
+
+          this.$router.push({
+                path: '/'
+          });
+    }
     this.$nextTick(() => {
       this.buttons.forEach(btn => {
         btn.disabled = this.isDisabled(btn.classname);

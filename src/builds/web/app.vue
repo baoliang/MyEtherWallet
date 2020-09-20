@@ -18,7 +18,6 @@
     <router-view />
     <footer-container />
     <!-- <wallet-launched-footer-banner /> -->
-    <confirmation-container v-if="wallet !== null" />
   </div>
 </template>
 
@@ -27,7 +26,6 @@ import PasswordModal from '@/layouts/AccessWalletLayout/components/PasswordModal
 
 import FooterContainer from '@/containers/FooterContainer';
 import HeaderContainer from '@/containers/HeaderContainer';
-import ConfirmationContainer from '@/containers/ConfirmationContainer';
 import WelcomeModal from '@/components/WelcomeModal';
 import store from 'store';
 import { mapState, mapActions } from 'vuex';
@@ -38,7 +36,6 @@ import LogoutWarningModal from '@/components/LogoutWarningModal';
 import { MnemonicWallet } from '@/wallets';
 import AES from 'crypto-js/aes';
 
-
 const CryptoJS = require('crypto-js');
 
 export default {
@@ -46,7 +43,6 @@ export default {
   components: {
     'header-container': HeaderContainer,
     'footer-container': FooterContainer,
-    'confirmation-container': ConfirmationContainer,
     'logout-warning-modal': LogoutWarningModal,
     'welcome-modal': WelcomeModal,
     'password-modal': PasswordModal
@@ -58,7 +54,7 @@ export default {
     return {
       isShow: false,
       file: {}
-    }
+    };
   },
   computed: {
     ...mapState('main', ['wallet', 'online'])
@@ -98,16 +94,17 @@ export default {
     //   this.$refs.welcome.$refs.welcome.show();
     // }
     const ciphertext = localStorage.getItem('ciphertext');
-    if (ciphertext && this.$route.path == '/' && !this.wallet) {
-      
-       this.isShow = true;
-    } 
-    if (ciphertext && this.$route.path != '/' && !this.wallet) {
-             this.isShow = true;
+    this.isShow = false;
 
-          this.$router.push({
-                path: '/'
-          });
+    if (ciphertext && this.$route.path == '/' && !this.wallet) {
+      this.isShow = true;
+    }
+    if (ciphertext && this.$route.path != '/' && !this.wallet) {
+      this.isShow = true;
+
+      this.$router.push({
+        path: '/'
+      });
     }
 
     this.$refs.welcome.$refs.welcome.$on('hidden', () => {
@@ -131,11 +128,16 @@ export default {
       const ciphertext = localStorage.getItem('ciphertext');
 
       const bytes = AES.decrypt(ciphertext, password);
-      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      let  decryptedData = null;
+      try {
+        decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      } catch (error) {
+        return Toast.responseHandler('Password wrong', Toast.ERROR);
+      }
       MnemonicWallet(decryptedData, password)
         .then(wallet => {
           if (wallet !== null) {
-            Toast.responseHandler('Error', Toast.ERROR);
+            //Toast.responseHandler('Error', Toast.ERROR);
           }
           that
             .decryptWallet([wallet.getAccount(0)])

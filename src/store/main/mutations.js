@@ -43,6 +43,7 @@ const CHECK_IF_ONLINE = async function (state, status) {
 
 const CLEAR_WALLET = function (state) {
   state.wallet = null;
+  localStorage.clear();
   state.account = {
     balance: 0,
     address: null,

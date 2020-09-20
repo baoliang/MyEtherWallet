@@ -14,7 +14,7 @@
           <h4 class="modal-title">{{ $t('common.balance.total') }}</h4>
           <div class="margin-left-auto total-balance-amount">
             <span>{{ balance }}</span>
-            {{ network.type.currencyName }}
+            SKT
           </div>
         </div>
       </div>
