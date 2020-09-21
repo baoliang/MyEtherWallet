@@ -85,6 +85,7 @@ export default {
       return this.tokenSymbol.toLowerCase();
     },
     checksumAddress() {
+      console.log('ddd')
       if (isAddress(this.tokenTransferTo.toLowerCase()))
         return toChecksumAddress(this.tokenTransferTo.toLowerCase());
       if (isAddress(this.address)) return toChecksumAddress(this.address);

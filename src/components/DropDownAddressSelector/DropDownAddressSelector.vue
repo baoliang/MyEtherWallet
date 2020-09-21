@@ -28,7 +28,6 @@
         <div>
           <input
             ref="addressInput"
-            v-addr-resolver="'selectedAddress'"
             :placeholder="$t('common.enter-addr')"
             type="text"
             autocomplete="off"
@@ -47,18 +46,6 @@
           />
           <div v-if="avatar !== ''" class="avatar-container">
             <img :src="avatar" />
-          </div>
-          <div v-if="isToken(currency)">
-            <img
-              :alt="$t('common.currency.ethereum')"
-              class="currency-icon"
-              src="@/assets/images/currency/eth.svg"
-            />
-          </div>
-          <div v-else>
-            <i
-              :class="['currency-icon', 'as-font', 'cc', currency, 'cc-icon']"
-            />
           </div>
         </div>
         <div class="dropdown-open-button" @click="dropdownOpen = !dropdownOpen">
@@ -126,10 +113,8 @@
 import '@/assets/images/currency/coins/asFont/cryptocoins.css';
 import '@/assets/images/currency/coins/asFont/cryptocoins-colors.css';
 import Blockie from '@/components/Blockie';
-import { EthereumTokens, BASE_CURRENCY } from '@/partners';
 import { mapState, mapActions } from 'vuex';
 import { Toast } from '@/helpers';
-import utils from 'web3-utils';
 import AddressBookModal from '@/components/AddressBookModal';
 
 export default {
@@ -168,13 +153,7 @@ export default {
   },
   computed: {
     ...mapState('main', ['addressBook', 'account']),
-    hasMessage() {
-      return (
-        (!this.isValidAddress && this.selectedAddress.length > 0) ||
-        (this.isValidAddress &&
-          this.selectedAddress.toLowerCase() !== this.hexAddress.toLowerCase())
-      );
-    },
+ 
     sortedAddressBook() {
       const addrBk = this.addressBook;
       return addrBk.sort((a, b) => {
@@ -183,18 +162,6 @@ export default {
 
         return a < b ? -1 : a > b ? 1 : 0;
       });
-    },
-    addresses() {
-      return this.currentAddress
-        ? [
-            {
-              address: this.currentAddress,
-              currency: BASE_CURRENCY,
-              resolverAddr: this.currentAddress
-            },
-            ...this.sortedAddressBook
-          ]
-        : [...this.sortedAddressBook];
     }
   },
   watch: {
@@ -229,31 +196,37 @@ export default {
     openAddrModal() {
       this.$refs.addressBook.$refs.addressBookModal.show();
     },
-    debouncedInput: utils._.debounce(function (e) {
-      this.selectedAddress = e.target.value;
-    }, 300),
+    debouncedInput: function (e) {
+     
+     this.selectedAddress = e.target.value;
+        if(this.selectedAddress.indexOf('ms')  == 0) {
+          this.isValidAddress = true;
+                        this.validateAddress(true);
+
+        } else {
+                        this.validateAddress(false);
+
+        }
+
+     //this.isValidAddress=  true;
+    },
     copyToClipboard(ref) {
       ref.select();
       document.execCommand('copy');
       Toast.responseHandler(this.$t('common.copied'), Toast.INFO);
     },
-    isToken(symbol) {
-      return typeof EthereumTokens[symbol] !== 'undefined';
-    },
+
     listedAddressClick(address) {
       this.toAddressCheckMark = true;
       this.dropdownOpen = !this.dropdownOpen;
       this.selectedAddress = address;
       this.$refs.addressInput.value = address;
     },
-    validateAddress() {
-      if (this.isValidAddress) {
-        this.$emit('toAddress', { address: this.hexAddress, valid: true });
-        this.$emit('validAddress', true);
-      } else {
-        this.$emit('toAddress', { address: '', valid: false });
-        this.$emit('validAddress', false);
-      }
+    validateAddress(v) {
+      
+        this.$emit('toAddress', { address: this.hexAddress, valid: v });
+        this.$emit('validAddress', v);
+      
     }
   }
 };

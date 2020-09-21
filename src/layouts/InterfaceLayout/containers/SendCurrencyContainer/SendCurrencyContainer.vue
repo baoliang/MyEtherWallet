@@ -176,16 +176,7 @@ export default {
       return 0;
     },
     isValidAmount() {
-      const notEnoughGasMsg =
-        this.$t('errorsGlobal.not-valid-amount-total') +
-        ' Gas ' +
-        this.$t('errorsGlobal.to-send');
-      const notEnoughTokenMsg =
-        this.$t('errorsGlobal.not-valid-amount-total') +
-        ' ' +
-        'SKT' +
-        ' ' +
-        this.$t('errorsGlobal.to-send');
+
       const notEnoughCurrencyMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
         ' ' +
@@ -193,13 +184,10 @@ export default {
         ' ' +
         this.$t('errorsGlobal.to-send');
       const invalidValueMsg = this.$t('errorsGlobal.invalid-value');
-      const enoughTokenBalance = new BigNumber(this.toValue).lte(
-        this.selectedCurrency.balance
-      );
+ 
       const enoughCurrency = new BigNumber(this.toValue)
         .plus(this.txFeeEth)
         .lte(this.balanceDefault);
-      const enoughGas = new BigNumber(this.txFeeEth).lte(this.balanceDefault);
       const validDecimal = this.isValidDecimals;
       if (new BigNumber(this.toValue).lt(0)) {
         return {
@@ -207,19 +195,7 @@ export default {
           valid: false
         };
       }
-      if (this.isToken) {
-        const enoughBalance = enoughTokenBalance && enoughGas && validDecimal;
-        return {
-          valid: enoughBalance,
-          msg: enoughBalance
-            ? ''
-            : !enoughTokenBalance
-            ? notEnoughTokenMsg
-            : !enoughGas
-            ? notEnoughGasMsg
-            : invalidValueMsg
-        };
-      }
+      
       return {
         valid: enoughCurrency && validDecimal,
         msg: enoughCurrency
@@ -247,12 +223,7 @@ export default {
       return new BigNumber(this.account.balance);
     },
     validInputs() {
-      return (
-        this.isValidAmount.valid &&
-        this.isValidAddress &&
-        new BigNumber(this.gasLimit).gte(0) &&
-        Misc.validateHexString(this.toData)
-      );
+      return this.isValidAmount.valid && this.isValidAddress;
     },
     isToken() {
       // const symbol = 'SKT';
@@ -304,7 +275,7 @@ export default {
     multiWatch: utils._.debounce(function () {
       if (this.validInputs) this.estimateGas();
     }, 500),
-    network(newVal) {
+    network() {
       // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
     },
     isPrefilled() {

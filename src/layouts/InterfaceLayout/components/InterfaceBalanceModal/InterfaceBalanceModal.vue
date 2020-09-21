@@ -85,7 +85,7 @@ export default {
   },
   watch: {
     balance() {
-      this.fetchBalanceData();
+      //this.fetchBalanceData();
     }
   },
   mounted() {
@@ -94,7 +94,7 @@ export default {
 
   methods: {
     async fetchBalanceData() {
-         const url = 'http://52.83.60.115:3001/api/balance/ms1qqzgs9tynwvxku6dat6xw4aaqeyzd9u7txskndcfd4c258rz9anl8qhlm8qv';
+         const url = 'http://52.83.60.115:3002/api/balance/ms1qqzgs9tynwvxku6dat6xw4aaqeyzd9u7txskndcfd4c258rz9anl8qhlm8qv';
         const fetchValues = await fetch(url);
         const values = await fetchValues.json();
         console.log(values,'values')

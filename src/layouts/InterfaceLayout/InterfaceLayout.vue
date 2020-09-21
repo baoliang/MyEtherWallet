@@ -658,8 +658,8 @@ export default {
         const fetchValues = await fetch(url);
         const values = await fetchValues.json();
         console.log(values,'values')
-              this.balance = values.value;
-          this.setAccountBalance(values.value);
+              this.balance = values.balance;
+          this.setAccountBalance(values.balance);
         // web3.eth
         //   .getBalance(this.address.toLowerCase())
         //   .then(res => {
