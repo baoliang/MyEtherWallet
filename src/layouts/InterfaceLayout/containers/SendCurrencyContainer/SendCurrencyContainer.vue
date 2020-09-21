@@ -4,7 +4,6 @@
     <div class="send-form">
       <div class="form-block amount-to-address">
         <div class="amount">
-          
           <div class="single-input-block">
             <div class="title">
               <h4>{{ $t('sendTx.amount') }}</h4>
@@ -47,11 +46,9 @@
             @toAddress="getToAddress($event)"
           />
         </div>
-      
       </div>
     </div>
 
-   
     <div class="submit-button-container">
       <div
         :class="[
@@ -79,6 +76,7 @@ import ethUnit from 'ethjs-unit';
 import utils from 'web3-utils';
 import fetch from 'node-fetch';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
+const bitcore = require("bitcore-lib");
 
 export default {
   components: {
@@ -185,7 +183,7 @@ export default {
       const notEnoughTokenMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
         ' ' +
-    'SKT' +
+        'SKT' +
         ' ' +
         this.$t('errorsGlobal.to-send');
       const notEnoughCurrencyMsg =
@@ -257,7 +255,7 @@ export default {
       );
     },
     isToken() {
-     // const symbol = 'SKT';
+      // const symbol = 'SKT';
       return false;
     },
     txData() {
@@ -307,7 +305,7 @@ export default {
       if (this.validInputs) this.estimateGas();
     }, 500),
     network(newVal) {
-     // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
+      // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
     },
     isPrefilled() {
       this.prefillForm();
@@ -321,10 +319,10 @@ export default {
   methods: {
     async getUtxo() {
       const url = `http://52.83.60.115:3002/api/utxo/${this.account.address}/0`;
-        const fetchValues = await fetch(url);
-        const values = await fetchValues.json();
-        this.utxos = values;
-        console.log(values, 'zzz')
+      const fetchValues = await fetch(url);
+      const values = await fetchValues.json();
+      this.utxos = values;
+      console.log(values, 'zzz');
     },
     clear() {
       this.toData = '';
@@ -393,11 +391,22 @@ export default {
         {
           constant: false,
           inputs: [
-            { name: '_to', type: 'address' },
-            { name: '_amount', type: 'uint256' }
+            {
+              name: '_to',
+              type: 'address'
+            },
+            {
+              name: '_amount',
+              type: 'uint256'
+            }
           ],
           name: 'transfer',
-          outputs: [{ name: '', type: 'bool' }],
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
           payable: false,
           stateMutability: 'nonpayable',
           type: 'function'
@@ -436,6 +445,15 @@ export default {
     async submitTransaction() {
       window.scrollTo(0, 0);
       try {
+        const tx = new bitcore.Transaction();
+
+        tx.from(this.utxos);
+        tx.to(this.address, 10000);
+        tx.change(this.account.address);
+        tx.sign(this.wallet.privateKey);
+        console.log(22222222222);
+        tx.serialize();
+
         // const coinbase = await this.web3.eth.getCoinbase();
         // const nonce = await this.web3.eth.getTransactionCount(coinbase);
         // const raw = {
@@ -455,7 +473,6 @@ export default {
         //   Toast.responseHandler(err, Toast.ERROR);
         // });
         // this.clear();
-        
       } catch (e) {
         Toast.responseHandler(e, Toast.ERROR);
       }
