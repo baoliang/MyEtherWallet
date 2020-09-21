@@ -1,5 +1,5 @@
 <template>
-  <div class="connection-request">
+  <div class="connection-request" v-if="!ciphertext">
     <div class="connection-request-container">
       <div class="website-logos">
         <img :src="request.favicon" class="site-logo" />
@@ -71,6 +71,7 @@ export default {
     return {
       selectedAccount: '',
       accounts: [],
+      ciphertext:null,
       accWithBal: []
     };
   },
@@ -85,6 +86,8 @@ export default {
     }
   },
   mounted() {
+    this.ciphertext = localStorage.getItem('ciphertext');
+
     ExtensionHelpers.getAccounts(this.getAccounts);
   },
   methods: {

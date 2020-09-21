@@ -16,7 +16,7 @@ const AddrResolver = {
     let network = vnode.context.$store.state.main.network;
     let parentCurrency = vnode.context.$parent.currency
       ? vnode.context.$parent.currency
-      : network.type.name;
+      :'';
     let address = '';
     const resolution = new Resolution({
       blockchain: {
@@ -29,7 +29,7 @@ const AddrResolver = {
     });
     vnode.context.$parent.$watch('$store.state.main.network', function (e) {
       network = e;
-      parentCurrency = e.type.name;
+      parentCurrency = 'SKT'//e.type.name;
       actualProcess(address);
     });
     vnode.context.$parent.$watch('currency', function (e) {
@@ -65,7 +65,7 @@ const AddrResolver = {
       const errorPar = document.createElement('p');
       errorPar.classList.add('resolver-error');
       if (
-        (parentCurrency === network.type.name ||
+        (parentCurrency === 'SKT' ||
           EthereumTokens[parentCurrency]) &&
         Misc.isValidETHAddress(domain)
       ) {
@@ -79,7 +79,7 @@ const AddrResolver = {
           _this.hexAddress = '';
           // eslint-disable-next-line
           errorPar.innerText = _this.$t('ens.ens-resolver.no-resolver', {
-            network: network.type.name[0]
+            network: 'SKT'//network.type.name[0]
           });
           appendElement(errorPar);
         } else {
@@ -95,7 +95,7 @@ const AddrResolver = {
             })
             .catch(() => {
               if (
-                parentCurrency === network.type.name ||
+                parentCurrency === 'SKT' ||
                 EthereumTokens[parentCurrency]
               ) {
                 ens
@@ -124,7 +124,7 @@ const AddrResolver = {
                 // eslint-disable-next-line
                 errorPar.innerText = _this.$t(
                   'ens.ens-resolver.network-not-found',
-                  { network: network.type.name[0] }
+                  { network: 'SKT' }
                 );
                 _this.isValidAddress = false;
                 _this.hexAddress = '';
@@ -246,7 +246,7 @@ const AddrResolver = {
           if (!checkDarklist(address)) {
             _this.isValidAddress = true;
             _this.hexAddress =
-              parentCurrency === network.type.name
+              parentCurrency === 'SKT'
                 ? toChecksumAddress(address)
                 : address;
             messagePar.classList.add('resolver-addr');

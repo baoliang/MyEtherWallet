@@ -29,6 +29,7 @@ const toChecksumAddress = address => {
   //   : 1;
   // if (chainID === RSK.chainID || chainID === RSKTEST.chainID)
   //   return toRSKChecksumAddress(address, chainID);
-  return web3.utils.toChecksumAddress(address);
+  return address
+  //return web3.utils.toChecksumAddress(address);
 };
 export { isAddress, toChecksumAddress };

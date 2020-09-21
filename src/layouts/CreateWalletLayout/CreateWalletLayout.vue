@@ -169,6 +169,14 @@ export default {
     }
   },
   mounted() {
+      const ciphertext = localStorage.getItem('ciphertext');
+  
+    if (ciphertext &&  !this.wallet) {
+
+          this.$router.push({
+                path: '/'
+          });
+    }
     this.canDownloadApple =
       platform.product !== null
         ? platform.product.toLowerCase() !== 'ipad'

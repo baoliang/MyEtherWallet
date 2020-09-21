@@ -15,7 +15,7 @@
         </div>
       </a>
       <router-link to="/" @click.native="closeMenu">
-      Xxx
+      SKT
         <!-- <img src="@/assets/images/short-hand-logo-web.png" width="120" /> -->
       </router-link>
 
@@ -54,13 +54,13 @@
       <!-- <div class="font-reset-disabled mb-5">
         <customer-support mobile-menu />
       </div> -->
-      <div
+      <!-- <div
         v-if="account.address"
         class="font-reset-disabled mb-5"
         @click="opensettings"
       >
         <div>{{ $t('common.settings') }}</div>
-      </div>
+      </div> -->
       <!-- <div class="font-reset-disabled mb-5" @click="languageMenu">
         <div>{{ $t('common.language') }}</div>
       </div> -->

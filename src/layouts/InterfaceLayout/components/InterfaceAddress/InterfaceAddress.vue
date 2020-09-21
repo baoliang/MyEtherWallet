@@ -23,14 +23,14 @@
           <p class="address">{{ address }}</p>
         </div>
         <div class="icon-container">
-          <button
+          <!-- <button
             v-if="hasMultipleAddr"
             id="popover-ref-switch"
             class="change-button"
             @click="switchAddr"
           >
             {{ $t('interface.addr.button-switch') }}
-          </button>
+          </button> -->
           <b-btn id="popover-ref-qrcode" class="custom-tooltip" @click="qrcode">
             <img alt src="~@/assets/images/icons/qr-code-white.svg" />
           </b-btn>

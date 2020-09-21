@@ -35,7 +35,7 @@ const webpackConfig = {
 const exportObj = {
   publicPath: process.env.ROUTER_MODE === 'history' ? '/' : './',
   configureWebpack: webpackConfig,
-  lintOnSave: process.env.NODE_ENV === 'production' ? 'error' : true,
+  lintOnSave: process.env.NODE_ENV === 'production' ? false : true,
   integrity: process.env.WEBPACK_INTEGRITY === 'false' ? false : true,
   pwa: defaultConfigs.pwa
 };

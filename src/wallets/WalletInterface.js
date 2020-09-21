@@ -2,6 +2,7 @@ import {
   getBufferFromHex,
   getSignTransactionObject,
   sanitizeHex,
+  getSktAddress,
   calculateChainIdFromV
 } from './utils';
 import {
@@ -74,11 +75,12 @@ class WalletInterface {
 
   getAddress() {
     if (this.isAddress) return this.publicKey;
-    return publicToAddress(this.publicKey, true);
+    return getSktAddress(this.publicKey, 1);
   }
 
   getAddressString() {
-    return bufferToHex(this.getAddress());
+    return this.getAddress();
+   // return bufferToHex(this.getAddress());
   }
 
   getChecksumAddressString() {

@@ -4,18 +4,7 @@
     <div class="send-form">
       <div class="form-block amount-to-address">
         <div class="amount">
-          <div class="single-input-block">
-            <div class="title">
-              <h4>{{ $t('sendTx.type') }}</h4>
-            </div>
-            <currency-picker
-              :currency="tokensWithBalance"
-              :page="'sendEthAndTokens'"
-              :token="true"
-              :default="selectedCurrency !== '' ? selectedCurrency : {}"
-              @selectedCurrency="selectedCurrency = $event"
-            />
-          </div>
+          
           <div class="single-input-block">
             <div class="title">
               <h4>{{ $t('sendTx.amount') }}</h4>
@@ -58,92 +47,11 @@
             @toAddress="getToAddress($event)"
           />
         </div>
-        <div class="tx-fee">
-          <div class="title">
-            <h4>{{ $t('sendTx.tx-fee') }}</h4>
-            <p class="copy-button prevent-user-select" @click="openSettings">
-              {{ $t('common.edit') }}
-            </p>
-          </div>
-          <div class="fee-value">
-            <div class="gwei">
-              {{ gasPrice }} {{ $t('common.gas.gwei') }}
-              <!--(Economic)-->
-            </div>
-            <div v-show="network.type.name === 'ETH'" class="usd">
-              <i18n path="sendTx.cost-eth-convert" tag="div">
-                <span slot="txFeeEth">{{ txFeeEth }}</span>
-                <span slot="convert">{{ convert }}</span>
-              </i18n>
-            </div>
-          </div>
-          <div v-if="showGasWarning" class="gas-price-warning">
-            {{ $t('errorsGlobal.high-gas-limit-warning') }}
-          </div>
-        </div>
+      
       </div>
     </div>
 
-    <div class="send-form advanced">
-      <div class="advanced-content">
-        <div class="toggle-button-container">
-          <h4>{{ $t('common.advanced') }}</h4>
-          <div class="toggle-button">
-            <span>{{ $t('sendTx.data-gas') }}</span>
-            <!-- Rounded switch -->
-            <div class="sliding-switch-white">
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  @click="advancedExpand = !advancedExpand"
-                />
-                <span class="slider round" />
-              </label>
-            </div>
-          </div>
-        </div>
-        <div
-          :class="advancedExpand && 'input-container-open'"
-          class="input-container"
-        >
-          <div class="margin-container">
-            <div v-show="!isToken" class="the-form user-input">
-              <p>{{ $t('sendTx.add-data') }}</p>
-              <input
-                v-model="toData"
-                :placeholder="$t('sendTx.ph-add-data')"
-                type="text"
-                autocomplete="off"
-              />
-              <i
-                :class="[
-                  isValidData ? '' : 'not-good',
-                  'fa fa-check-circle good-button'
-                ]"
-                aria-hidden="true"
-              />
-            </div>
-            <div class="the-form user-input">
-              <p>{{ $t('common.gas.limit') | capitalize }}</p>
-              <input
-                v-model="gasLimit"
-                :placeholder="$t('common.gas.limit')"
-                type="number"
-                min="0"
-                name
-              />
-              <i
-                :class="[
-                  isValidGasLimit ? '' : 'not-good',
-                  'fa fa-check-circle good-button'
-                ]"
-                aria-hidden="true"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   
     <div class="submit-button-container">
       <div
         :class="[
@@ -164,7 +72,6 @@
 <script>
 import { mapState } from 'vuex';
 import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
-import CurrencyPicker from '../../components/CurrencyPicker';
 import { Transaction } from 'ethereumjs-tx';
 import { Misc, Toast } from '@/helpers';
 import BigNumber from 'bignumber.js';
@@ -176,7 +83,6 @@ import DropDownAddressSelector from '@/components/DropDownAddressSelector';
 export default {
   components: {
     'interface-container-title': InterfaceContainerTitle,
-    'currency-picker': CurrencyPicker,
     'dropdown-address-selector': DropDownAddressSelector
   },
   props: {
@@ -278,13 +184,13 @@ export default {
       const notEnoughTokenMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
         ' ' +
-        this.selectedCurrency.symbol +
+    'SKT' +
         ' ' +
         this.$t('errorsGlobal.to-send');
       const notEnoughCurrencyMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
         ' ' +
-        this.network.type.currencyName +
+        'SKT' +
         ' ' +
         this.$t('errorsGlobal.to-send');
       const invalidValueMsg = this.$t('errorsGlobal.invalid-value');
@@ -350,8 +256,8 @@ export default {
       );
     },
     isToken() {
-      const symbol = this.network.type.currencyName;
-      return this.selectedCurrency.symbol !== symbol;
+     // const symbol = 'SKT';
+      return false;
     },
     txData() {
       if (this.isToken) {
@@ -400,7 +306,7 @@ export default {
       if (this.validInputs) this.estimateGas();
     }, 500),
     network(newVal) {
-      if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
+     // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
     },
     isPrefilled() {
       this.prefillForm();
@@ -408,7 +314,7 @@ export default {
   },
   mounted() {
     this.checkPrefilled();
-    if (this.online && this.network.type.name === 'ETH') this.getEthPrice();
+    //if (this.online && this.network.type.name === 'ETH') this.getEthPrice();
   },
   methods: {
     clear() {
@@ -421,8 +327,8 @@ export default {
       this.advancedExpand = false;
       this.clearAddress = !this.clearAddress;
       this.selectedCurrency = {
-        name: this.network.type.name_long,
-        symbol: this.network.type.currencyName
+        name: 'SKT',
+        symbol: 'SKT'
       };
     },
     getToAddress(data) {

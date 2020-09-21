@@ -1,6 +1,6 @@
 <template>
   <div>
-    <interface-balance-modal ref="balance" :balance="balance" />
+    <!-- <interface-balance-modal ref="balance" :balance="balance" /> -->
     <div class="info-block">
       <div class="block-image">
         <img alt class="icon" src="~@/assets/images/icons/wallet.svg" />
@@ -16,48 +16,13 @@
                 {{ balance }}
               </div>
               <div class="currency">
-                {{ network.type.currencyName }}
+                SKT
               </div>
             </div>
             <i v-show="balance === undefined" class="fa fa-spin fa-spinner" />
           </div>
         </div>
-        <div class="icon-container">
-          <b-btn
-            id="balanceCheck"
-            class="balance-check custom-tooltip"
-            @click="balanceModalOpen"
-          >
-            <img alt src="~@/assets/images/icons/more.svg" />
-          </b-btn>
-          <b-btn
-            v-if="false"
-            id="refreshBalance"
-            class="custom-tooltip"
-            @click="fetchBalance"
-          >
-            <img
-              v-show="!fetchingBalance"
-              alt
-              src="~@/assets/images/icons/change.svg"
-            />
-            <i v-show="fetchingBalance" class="fa fa-lg fa-spinner fa-spin" />
-          </b-btn>
-          <b-popover
-            :content="$t('interface.check-balance.string')"
-            target="balanceCheck"
-            placement="top"
-            triggers="hover"
-            title
-          />
-          <b-popover
-            :content="$t('interface.check-balance.refresh')"
-            target="refreshBalance"
-            placement="top"
-            triggers="hover"
-            title
-          />
-        </div>
+       
         <!-- .icon-container -->
       </div>
       <!-- .block-content -->
@@ -66,11 +31,9 @@
 </template>
 
 <script>
-import InterfaceBalanceModal from '../InterfaceBalanceModal';
 import { mapState } from 'vuex';
 export default {
   components: {
-    'interface-balance-modal': InterfaceBalanceModal
   },
   props: {
     balance: {

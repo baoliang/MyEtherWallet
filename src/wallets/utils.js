@@ -2,7 +2,8 @@ import { bufferToInt } from 'ethereumjs-util';
 const bs58 = require('bs58');
 const Buffer = require('buffer/').Buffer;  // note: the trailing slash is important!
 const CkBuffer = require('checksum-buffer');
-// const crypto = require('crypto');
+ const crypto = require('crypto');
+ let bech32 = require('bech32')
 
 const getBufferFromHex = hex => {
   hex = sanitizeHex(hex);
@@ -13,15 +14,13 @@ const getBufferFromHex = hex => {
 const getSktAddress =  (pubkey, version) => {
   //let b = Buffer.alloc(1+len(pubkey)+4)
   //b := make([]byte, 0, 1+len(pubkey)+4)
-  const bufA = Buffer.concat([version, pubkey], version.length+pubkey.length);
-  //b.append(version)
-//	b = append(b, version)
-	//b = append(b, pubkey[:]...)
-  const cksum = new CkBuffer(bufA, 'sha256',4);
-  const bufB = Buffer.concat([Buffer, cksum], cksum.length+bufA.length);
+ const buf4 = Buffer.from([0,0]);
+  //const buf5 = Buffer.from([245, 0, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 0, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 13, 14])
+  const words = Buffer.from(bech32.toWords(pubkey))
+  const p = Buffer.concat([buf4, words], words.length+buf4.length)
 
-//	b = append(b, cksum[:]...)
-  return bs58.encode(bufB)
+//	b = append(b, cksum[:]...)0
+  return bech32.encode('ms', p) //bs58.encode(bufB)
 
 }
 const padLeftEven = hex => {
