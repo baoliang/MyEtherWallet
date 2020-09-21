@@ -72,7 +72,7 @@
 <script>
 import { mapState } from 'vuex';
 import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
-import { Transaction } from 'ethereumjs-tx';
+// import { Transaction } from 'ethereumjs-tx';
 import { Misc, Toast } from '@/helpers';
 import BigNumber from 'bignumber.js';
 import ethUnit from 'ethjs-unit';
@@ -144,6 +144,7 @@ export default {
       hexAddress: '',
       address: '',
       toValue: '0',
+      utxos: [],
       gasLimit: '21000',
       toData: '',
       selectedCurrency: '',
@@ -245,7 +246,7 @@ export default {
       return new BigNumber(this.gasLimit).gte(0);
     },
     balanceDefault() {
-      return new BigNumber(ethUnit.fromWei(this.account.balance, 'ether'));
+      return new BigNumber(this.account.balance);
     },
     validInputs() {
       return (
@@ -314,9 +315,17 @@ export default {
   },
   mounted() {
     this.checkPrefilled();
+    this.getUtxo();
     //if (this.online && this.network.type.name === 'ETH') this.getEthPrice();
   },
   methods: {
+    async getUtxo() {
+      const url = `http://52.83.60.115:3002/api/utxo/${this.account.address}/0`;
+        const fetchValues = await fetch(url);
+        const values = await fetchValues.json();
+        this.utxos = values;
+        console.log(values, 'zzz')
+    },
     clear() {
       this.toData = '';
       this.toValue = '0';
@@ -427,25 +436,26 @@ export default {
     async submitTransaction() {
       window.scrollTo(0, 0);
       try {
-        const coinbase = await this.web3.eth.getCoinbase();
-        const nonce = await this.web3.eth.getTransactionCount(coinbase);
-        const raw = {
-          nonce: Misc.sanitizeHex(new BigNumber(nonce).toString(16)),
-          gasPrice: Misc.sanitizeHex(
-            ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
-          ),
-          gasLimit: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
-          to: this.txTo,
-          value: this.txValue,
-          data: this.txData
-        };
-        const _tx = new Transaction(raw);
-        const json = _tx.toJSON(true);
-        json.from = coinbase;
-        this.web3.eth.sendTransaction(json).catch(err => {
-          Toast.responseHandler(err, Toast.ERROR);
-        });
-        this.clear();
+        // const coinbase = await this.web3.eth.getCoinbase();
+        // const nonce = await this.web3.eth.getTransactionCount(coinbase);
+        // const raw = {
+        //   nonce: Misc.sanitizeHex(new BigNumber(nonce).toString(16)),
+        //   gasPrice: Misc.sanitizeHex(
+        //     ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
+        //   ),
+        //   gasLimit: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
+        //   to: this.txTo,
+        //   value: this.txValue,
+        //   data: this.txData
+        // };
+        // const _tx = new Transaction(raw);
+        // const json = _tx.toJSON(true);
+        // json.from = coinbase;
+        // this.web3.eth.sendTransaction(json).catch(err => {
+        //   Toast.responseHandler(err, Toast.ERROR);
+        // });
+        // this.clear();
+        
       } catch (e) {
         Toast.responseHandler(e, Toast.ERROR);
       }

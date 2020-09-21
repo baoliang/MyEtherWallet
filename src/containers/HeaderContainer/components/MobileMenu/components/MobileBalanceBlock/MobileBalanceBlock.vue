@@ -92,12 +92,12 @@ export default {
   },
   watch: {
     balance() {
-      this.fetchBalanceData();
+      //this.fetchBalanceData();
     }
   },
   mounted() {
     this.getBalance();
-    this.fetchBalanceData();
+   // this.fetchBalanceData();
   },
   methods: {
     ...mapActions('main', ['setAccountBalance']),
@@ -105,16 +105,17 @@ export default {
       this.getBalance();
       this.$refs.balanceModal.$refs.balance.show();
     },
-    getBalance() {
+    async getBalance() {
       if (this.account.address) {
-        this.web3.eth
-          .getBalance(this.account.address.toLowerCase())
-          .then(res => {
-            this.setAccountBalance(res);
-          })
-          .catch(err => {
-            Toast.responseHandler(err, Toast.ERROR);
-          });
+     
+        // this.web3.eth
+        //   .getBalance(this.account.address.toLowerCase())
+        //   .then(res => {
+        //     this.setAccountBalance(res);
+        //   })
+        //   .catch(err => {
+        //     Toast.responseHandler(err, Toast.ERROR);
+        //   });
       }
     },
     async fetchBalanceData() {

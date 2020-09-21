@@ -215,6 +215,7 @@ export default {
         path: '/'
       });
     }
+  
     //  this.setupOnlineEnvironment();
   },
   destroyed() {
@@ -650,9 +651,15 @@ export default {
       //     Toast.responseHandler(e, Toast.ERROR);
       //   });
     },
-    getBalance() {
+    async getBalance() {
       // const web3 = this.web3;
       if (this.address) {
+        const url = `http://52.83.60.115:3002/api/balance/${this.address}`;
+        const fetchValues = await fetch(url);
+        const values = await fetchValues.json();
+        console.log(values,'values')
+              this.balance = values.value;
+          this.setAccountBalance(values.value);
         // web3.eth
         //   .getBalance(this.address.toLowerCase())
         //   .then(res => {

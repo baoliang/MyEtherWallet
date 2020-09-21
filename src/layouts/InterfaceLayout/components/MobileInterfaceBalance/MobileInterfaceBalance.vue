@@ -58,6 +58,9 @@ export default {
       this.fetchingBalance = false;
     }
   },
+  mounted() {
+    this.fetchBalance();
+  },
   methods: {
     balanceModalOpen() {
       this.$refs.balance.$refs.balance.show();

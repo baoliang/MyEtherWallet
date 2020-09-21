@@ -1,8 +1,8 @@
 import { bufferToInt } from 'ethereumjs-util';
-const bs58 = require('bs58');
+// const bs58 = require('bs58');
 const Buffer = require('buffer/').Buffer;  // note: the trailing slash is important!
 const CkBuffer = require('checksum-buffer');
- const crypto = require('crypto');
+
  let bech32 = require('bech32')
 
 const getBufferFromHex = hex => {
@@ -11,14 +11,27 @@ const getBufferFromHex = hex => {
   return new Buffer(_hex, 'hex');
 };
 
+function getRedeeScript(pubkey){
+  return Buffer.concat([Buffer.from([51]),  pubkey,  Buffer.from([51]),Buffer.from([174])], 36) 
+}
+
 const getSktAddress =  (pubkey, version) => {
   //let b = Buffer.alloc(1+len(pubkey)+4)
   //b := make([]byte, 0, 1+len(pubkey)+4)
- const buf4 = Buffer.from([0,0]);
-  //const buf5 = Buffer.from([245, 0, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 0, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 13, 14])
-  const words = Buffer.from(bech32.toWords(pubkey))
-  const p = Buffer.concat([buf4, words], words.length+buf4.length)
 
+  // const ripemd160Digest = crypto
+  // .createHash("ripemd160")
+  // .update(pubkey, "hex")
+  // .digest("hex");
+  const reddscript = getRedeeScript(pubkey)
+  const ckbuf = new CkBuffer(reddscript, 'sha2-256',32).buffer;
+
+ const buf4 = Buffer.from([0,0]);
+  // const buf5 = Buffer.from([245, 0, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 0, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 13, 14])
+  // const xxx = new CkBuffer(reddscript, 'sha2-256');
+const witnessProgram = Buffer.from(ckbuf).slice(0,32)
+  const words = Buffer.from(bech32.toWords(witnessProgram));
+  const p = Buffer.concat([buf4, words])
 //	b = append(b, cksum[:]...)0
   return bech32.encode('ms', p) //bs58.encode(bufB)
 

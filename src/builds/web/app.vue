@@ -93,6 +93,7 @@ export default {
     // if (!store.get('notFirstTimeVisit') && this.$route.fullPath === '/') {
     //   this.$refs.welcome.$refs.welcome.show();
     // }
+    console.log(11123213)
     const ciphertext = localStorage.getItem('ciphertext');
     this.isShow = false;
 

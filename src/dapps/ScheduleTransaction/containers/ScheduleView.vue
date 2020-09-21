@@ -669,18 +669,18 @@ export default {
   },
   mounted: async function () {
     if (this.online) {
-      this.eac = new EAC(this.web3);
+      // this.eac = new EAC(this.web3);
 
-      const url = 'https://cryptorates.mewapi.io/convert/ETH';
-      const fetchValues = await fetch(url);
-      const values = await fetchValues.json();
+      // const url = 'https://cryptorates.mewapi.io/convert/ETH';
+      // const fetchValues = await fetch(url);
+      // const values = await fetchValues.json();
 
-      if (!values['USDT']) {
-        const toastText = this.$t('scheduleTx.usdt-not-available');
-        Toast.responseHandler(new Error(toastText), Toast.ERROR);
-        return;
-      }
-      this.ethPrice = new BigNumber(values['USDT']);
+      // if (!values['USDT']) {
+      //   const toastText = this.$t('scheduleTx.usdt-not-available');
+      //   Toast.responseHandler(new Error(toastText), Toast.ERROR);
+      //   return;
+      // }
+      // this.ethPrice = new BigNumber(values['USDT']);
     }
   },
   methods: {
