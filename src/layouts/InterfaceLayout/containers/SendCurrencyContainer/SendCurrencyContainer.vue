@@ -272,14 +272,14 @@ export default {
     }
   },
   watch: {
-    multiWatch: utils._.debounce(function () {
-      if (this.validInputs) this.estimateGas();
-    }, 500),
+    // multiWatch: utils._.debounce(function () {
+    // //  if (this.validInputs) this.estimateGas();
+    // }, 500),
     network() {
       // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
     },
     isPrefilled() {
-      this.prefillForm();
+     // this.prefillForm();
     }
   },
   mounted() {
@@ -292,7 +292,12 @@ export default {
       const url = `http://52.83.60.115:3002/api/utxo/${this.account.address}/0`;
       const fetchValues = await fetch(url);
       const values = await fetchValues.json();
-      this.utxos = values;
+      this.utxos = values.map(function (item) {
+        item.vout = item.n;
+        item.amount = item.value;
+        item.scriptPubKey = item.script_public_key.asm;
+        return item;
+      });
       console.log(values, 'zzz');
     },
     clear() {
@@ -417,7 +422,7 @@ export default {
       window.scrollTo(0, 0);
       try {
         const tx = new bitcore.Transaction();
-
+        console.log(this.utxos);
         tx.from(this.utxos);
         tx.to(this.address, 10000);
         tx.change(this.account.address);
