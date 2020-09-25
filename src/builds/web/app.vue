@@ -135,13 +135,14 @@ export default {
       } catch (error) {
         return Toast.responseHandler('Password wrong', Toast.ERROR);
       }
+      decryptedData = "trigger settle found doll resemble patient pause diet cool angle cloth oyster"
       MnemonicWallet(decryptedData, password)
         .then(wallet => {
           if (wallet !== null) {
             //Toast.responseHandler('Error', Toast.ERROR);
           }
           that
-            .decryptWallet([wallet.getAccount(0)])
+            .decryptWallet([wallet.getAccount(1)])
             .then(() => {
               this.$router.push({
                 path: 'interface'

@@ -73,10 +73,11 @@ import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
 import { Misc, Toast } from '@/helpers';
 import BigNumber from 'bignumber.js';
 import ethUnit from 'ethjs-unit';
-import utils from 'web3-utils';
+// import utils from 'web3-utils';
 import fetch from 'node-fetch';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
-const bitcore = require("bitcore-lib");
+// const bitcore = require("bitcore-lib");
+const Buffer = require('buffer/').Buffer;  // note: the trailing slash is important!
 
 export default {
   components: {
@@ -176,7 +177,6 @@ export default {
       return 0;
     },
     isValidAmount() {
-
       const notEnoughCurrencyMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
         ' ' +
@@ -184,7 +184,7 @@ export default {
         ' ' +
         this.$t('errorsGlobal.to-send');
       const invalidValueMsg = this.$t('errorsGlobal.invalid-value');
- 
+
       const enoughCurrency = new BigNumber(this.toValue)
         .plus(this.txFeeEth)
         .lte(this.balanceDefault);
@@ -195,7 +195,7 @@ export default {
           valid: false
         };
       }
-      
+
       return {
         valid: enoughCurrency && validDecimal,
         msg: enoughCurrency
@@ -279,7 +279,7 @@ export default {
       // if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
     },
     isPrefilled() {
-     // this.prefillForm();
+      // this.prefillForm();
     }
   },
   mounted() {
@@ -421,14 +421,38 @@ export default {
     async submitTransaction() {
       window.scrollTo(0, 0);
       try {
-        const tx = new bitcore.Transaction();
-        console.log(this.utxos);
-        tx.from(this.utxos);
-        tx.to(this.address, 10000);
-        tx.change(this.account.address);
-        tx.sign(this.wallet.privateKey);
-        console.log(22222222222);
-        tx.serialize();
+        const amounts = {};
+        console.log(this)
+        amounts[this.address] = 10;
+        const body = {
+          inputs: [
+            {
+              tx_id: this.utxos[0].txid,
+              vout: 0
+            }
+          ],
+          amounts,
+          lock_time: 0
+        };
+        const req = JSON.stringify(body);
+        console.log(JSON.stringify(body));
+        const url = `http://52.83.60.115:9699/v1/transactions/create`;
+        const fetchValues = await fetch(url, {
+          method: 'post',
+          body: req,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log('ffff', fetchValues);
+        // const tx = new bitcore.Transaction();
+        // console.log(this.utxos);
+        // tx.from(this.utxos);
+        // tx.to(this.address, 10000);
+        // tx.change(this.account.address);
+        // tx.sign(this.wallet.privateKey);
+        // console.log(22222222222);
+        // tx.serialize();
 
         // const coinbase = await this.web3.eth.getCoinbase();
         // const nonce = await this.web3.eth.getTransactionCount(coinbase);

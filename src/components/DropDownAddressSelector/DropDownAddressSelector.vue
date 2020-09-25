@@ -172,7 +172,7 @@ export default {
       this.$refs.addressInput.value = '';
     },
     hexAddress() {
-      this.validateAddress();
+      this.validateAddress(this.selectedAddress);
     },
     currency() {
       this.validateAddress(this.selectedAddress);
@@ -224,7 +224,7 @@ export default {
     },
     validateAddress(v) {
       
-        this.$emit('toAddress', { address: this.hexAddress, valid: v });
+        this.$emit('toAddress', { address: this.selectedAddress, valid: v });
         this.$emit('validAddress', v);
       
     }
