@@ -76,7 +76,7 @@ import ethUnit from 'ethjs-unit';
 // import utils from 'web3-utils';
 import fetch from 'node-fetch';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
-// const bitcore = require("bitcore-lib");
+const bitcore = require("bitcore-lib");
 const Buffer = require('buffer/').Buffer;  // note: the trailing slash is important!
 
 export default {
@@ -445,9 +445,13 @@ export default {
           }
         });
         console.log('ffff', fetchValues);
+        const BufferWriter = bitcore.encoding.BufferReader;
+        let writer = new BufferWriter();
+        writer.writeInt32LE(this.version);
+
         // const tx = new bitcore.Transaction();
         // console.log(this.utxos);
-        // tx.from(this.utxos);
+        // txnet.from(this.utxos);
         // tx.to(this.address, 10000);
         // tx.change(this.account.address);
         // tx.sign(this.wallet.privateKey);
